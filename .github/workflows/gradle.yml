@@ -28,5 +28,5 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build
-        working-directory: ${{github.workspace}}
+        working-directory: ${{github.workspace}}/src/kotlin-services
         run: gradle build
