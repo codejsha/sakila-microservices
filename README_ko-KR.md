@@ -6,24 +6,24 @@ Sakila REST API Microservices (Sample Project)
 
 [English](README.md) | [Korean](README_ko-KR.md)
 
-This project provides rental operations for the Sakila DVD Rental Store using microservices architecture. It's based on the Sakila sample database and serves as a learning resource.
+이 프로젝트는 마이크로 서비스 아키텍처를 사용하여 Sakila DVD 렌탈 스토어에 대한 대여 서비스를 제공합니다. Sakila 데이터베이스를 기반으로 하며 학습 리소스 목적으로 작성되었습니다.
 
-Monolith version is go to: https://github.com/codejsha/spring-rest-sakila
+모놀리스 버전은 다음 링크를 참조하세요: https://github.com/codejsha/spring-rest-sakila
 
-## Table of Contents
+## 목차
 
-- [Table of Contents](#table-of-contents)
-- [Getting Started](#getting-started)
-  - [Requirements](#requirements)
-  - [Libraries and Plugins](#libraries-and-plugins)
-- [Architecture](#architecture)
-- [Roadmap](#roadmap)
-- [Sample Data](#sample-data)
-- [References](#references)
+- [목차](#목차)
+- [시작하기](#시작하기)
+  - [요구사항](#요구사항)
+  - [라이브러리 및 플러그인](#라이브러리-및-플러그인)
+- [아키텍처](#아키텍처)
+- [예정사항 (로드맵)](#예정사항-로드맵)
+- [샘플 데이터](#샘플-데이터)
+- [참조](#참조)
 
-## Getting Started
+## 시작하기
 
-### Requirements
+### 요구사항
 
 - Kotlin 1.8
 - Java 17
@@ -32,18 +32,18 @@ Monolith version is go to: https://github.com/codejsha/spring-rest-sakila
 - Apache Kafka 3
 - MongoDB 6
 
-### Libraries and Plugins
+### 라이브러리 및 플러그인
 
-For a complete list, see the `gradle/libs.versions.toml` file.
+전체 목록은 `gradle/libs.versions.toml` 파일을 참조하세요.
 
 - Spring WebFlux
 - Spring Data R2DBC
 - Axon Framework
 - MapStruct
 
-## Architecture
+## 아키텍처
 
-The following diagram shows the architecture of the Sakila DVD Rental Store. The diagram is based on the [C4 model](https://c4model.com/).
+이 다이어그램은 Sakila DVD 렌탈 스토어의 아키텍처를 보여줍니다. 다이어그램은 [C4 모델](https://c4model.com/)을 기반으로 합니다.
 
 ```mermaid
 C4Container
@@ -103,7 +103,7 @@ C4Container
     UpdateLayoutConfig($c4ShapeInRow="4")
 ```
 
-## Roadmap
+## 예정사항 (로드맵)
 
 - [ ] Implement all services
 - [ ] Add tests for REST Docs and OpenAPI spec
@@ -113,10 +113,10 @@ C4Container
 - [ ] Add Argo CD resources for GitOps
 - [ ] Add Istio service mesh
 
-## Sample Data
+## 샘플 데이터
 
-The sample data comes from the Sakila sample database by MySQL and is intended for learning and testing purposes. It features a relational database model for a DVD rental store company that contains data related to films, actors, customers, rentals, and more.
+샘플 데이터는 MySQL의 Sakila 샘플 데이터베이스에서 제공되며 학습 및 테스트 목적으로 사용됩니다. 영화, 배우, 고객, 대여 등과 관련된 데이터를 포함하는 DVD 렌탈 스토어 회사의 관계형 데이터베이스 모델을 제공합니다.
 
-## References
+## 참조
 
 - [MySQL Sakila sample database](https://dev.mysql.com/doc/sakila/en/)
