@@ -9,7 +9,6 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
 import java.net.URI
-import java.util.logging.Level
 
 @Component
 @CrossOrigin
@@ -22,7 +21,7 @@ class CatalogCommandHandler(
             .zip(
                 commonRepository.getMaximumValueOfTable("actor", "actor_id").mapNotNull { it!!.plus(1) },
                 request.bodyToMono(ActorCreateRequestData::class.java)
-                    .log("createActor-requestBody", Level.DEBUG)
+                    .log()
             )
             .flatMap { tuple ->
                 reactiveCommandGateway.send<Any?>(CreateActorCommand(tuple.t1, tuple.t2))
@@ -34,7 +33,7 @@ class CatalogCommandHandler(
     fun updateActorName(request: ServerRequest): Mono<ServerResponse> {
         val actorId = request.pathVariable("actorId").toInt()
         return request.bodyToMono(ActorNameUpdateRequestData::class.java)
-            .log("updateActorName-requestBody")
+            .log()
             .flatMap { requestData ->
                 reactiveCommandGateway.send<Any?>(UpdateActorNameCommand(actorId, requestData))
                     .then(ServerResponse.ok().build())
@@ -54,7 +53,7 @@ class CatalogCommandHandler(
             .zip(
                 commonRepository.getMaximumValueOfTable("sakila.film", "film_id").mapNotNull { it!!.plus(1) },
                 request.bodyToMono(MovieCreateRequestData::class.java)
-                    .log("createMovie-requestBody")
+                    .log()
             )
             .flatMap { tuple ->
                 reactiveCommandGateway.send<Any?>(CreateMovieCommand(tuple.t1, tuple.t2))
@@ -66,7 +65,7 @@ class CatalogCommandHandler(
     fun updateMovie(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
         return request.bodyToMono(MovieUpdateRequestData::class.java)
-            .log("updateMovie-requestBody")
+            .log()
             .flatMap { requestData ->
                 reactiveCommandGateway.send<Any?>(UpdateMovieCommand(movieId, requestData))
                     .then(ServerResponse.ok().build())
