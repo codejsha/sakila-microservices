@@ -113,6 +113,7 @@ C4Container
 - [ ] Add Tekton CI/CD pipeline
 - [ ] Add Argo CD resources for GitOps
 - [ ] Add Istio service mesh
+- [ ] Add ServiceMonitor and PrometheusRule for monitoring
 - [ ] Add security
 
 ## Sample Data
