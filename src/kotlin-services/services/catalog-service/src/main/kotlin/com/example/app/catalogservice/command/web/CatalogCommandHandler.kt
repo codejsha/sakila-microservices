@@ -27,6 +27,7 @@ class CatalogCommandHandler(
                 reactiveCommandGateway.send<Any?>(CreateActorCommand(tuple.t1, tuple.t2))
                     .then(ServerResponse.created(URI.create("/catalog/actors/${tuple.t1}")).build())
                     .onErrorResume { ServerResponse.badRequest().build() }
+                    .timeout(java.time.Duration.ofSeconds(10))
             }
     }
 
@@ -38,6 +39,7 @@ class CatalogCommandHandler(
                 reactiveCommandGateway.send<Any?>(UpdateActorNameCommand(actorId, requestData))
                     .then(ServerResponse.ok().build())
                     .onErrorResume { ServerResponse.badRequest().build() }
+                    .timeout(java.time.Duration.ofSeconds(10))
             }
     }
 
@@ -46,6 +48,7 @@ class CatalogCommandHandler(
         return reactiveCommandGateway.send<Any?>(DeleteActorCommand(actorId))
             .then(ServerResponse.noContent().build())
             .onErrorResume { ServerResponse.badRequest().build() }
+            .timeout(java.time.Duration.ofSeconds(10))
     }
 
     fun createMovie(request: ServerRequest): Mono<ServerResponse> {
@@ -59,6 +62,7 @@ class CatalogCommandHandler(
                 reactiveCommandGateway.send<Any?>(CreateMovieCommand(tuple.t1, tuple.t2))
                     .then(ServerResponse.created(URI.create("/catalog/movies/${tuple.t1}")).build())
                     .onErrorResume { ServerResponse.badRequest().build() }
+                    .timeout(java.time.Duration.ofSeconds(10))
             }
     }
 
@@ -70,6 +74,7 @@ class CatalogCommandHandler(
                 reactiveCommandGateway.send<Any?>(UpdateMovieCommand(movieId, requestData))
                     .then(ServerResponse.ok().build())
                     .onErrorResume { ServerResponse.badRequest().build() }
+                    .timeout(java.time.Duration.ofSeconds(10))
             }
     }
 
@@ -78,6 +83,7 @@ class CatalogCommandHandler(
         return reactiveCommandGateway.send<Any?>(DeleteMovieCommand(movieId))
             .then(ServerResponse.noContent().build())
             .onErrorResume { ServerResponse.badRequest().build() }
+            .timeout(java.time.Duration.ofSeconds(10))
     }
 
     fun addMovieActor(request: ServerRequest): Mono<ServerResponse> {
@@ -87,6 +93,7 @@ class CatalogCommandHandler(
                 reactiveCommandGateway.send<Any?>(AddMovieActorCommand(movieId, requestData.actorId))
                     .then(ServerResponse.ok().build())
                     .onErrorResume { ServerResponse.badRequest().build() }
+                    .timeout(java.time.Duration.ofSeconds(10))
             }
     }
 
@@ -97,6 +104,7 @@ class CatalogCommandHandler(
                 reactiveCommandGateway.send<Any?>(RemoveMovieActorCommand(movieId, requestData.actorId))
                     .then(ServerResponse.ok().build())
                     .onErrorResume { ServerResponse.badRequest().build() }
+                    .timeout(java.time.Duration.ofSeconds(10))
             }
     }
 }
