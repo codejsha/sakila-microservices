@@ -30,7 +30,6 @@ Monolith version is go to: https://github.com/codejsha/spring-rest-sakila
 - Gradle 8
 - MySQL 8
 - Apache Kafka 3
-- MongoDB 6
 
 ### Libraries and Plugins
 
@@ -38,7 +37,6 @@ For a complete list, see the `gradle/libs.versions.toml` file.
 
 - Spring WebFlux
 - Spring Data R2DBC
-- Axon Framework
 - MapStruct
 
 ## Architecture

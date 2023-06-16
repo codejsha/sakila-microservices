@@ -30,7 +30,6 @@ Sakila REST API Microservices (Sample Project)
 - Gradle 8
 - MySQL 8
 - Apache Kafka 3
-- MongoDB 6
 
 ### 라이브러리 및 플러그인
 
@@ -38,7 +37,6 @@ Sakila REST API Microservices (Sample Project)
 
 - Spring WebFlux
 - Spring Data R2DBC
-- Axon Framework
 - MapStruct
 
 ## 아키텍처
