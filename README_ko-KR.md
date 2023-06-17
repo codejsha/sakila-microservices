@@ -105,7 +105,6 @@ C4Container
 
 - [ ] Implement all services
 - [ ] Add tests for REST Docs and OpenAPI spec
-- [ ] Add HATEOAS
 - [ ] Add Netflix Conductor for orchestration
 - [ ] Add Helm charts for each service
 - [ ] Add Tekton CI/CD pipeline
