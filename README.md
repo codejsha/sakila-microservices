@@ -4,9 +4,7 @@ Sakila REST API Microservices (Sample Project)
 
 ![Gradle Build](https://github.com/codejsha/sakila-microservices/actions/workflows/gradle.yml/badge.svg)
 
-[English](README.md) | [Korean](README_ko-KR.md)
-
-This project provides rental operations for the Sakila DVD Rental Store using microservices architecture. It's based on the Sakila sample database and serves as a learning resource.
+This project provides rental operations for the Sakila DVD Rental Store using microservices architecture. It's based on the Sakila sample database and serves as a example resource.
 
 Monolith version is go to: https://github.com/codejsha/spring-rest-sakila
 
