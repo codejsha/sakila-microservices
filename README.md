@@ -31,7 +31,7 @@ Monolith version is go to: https://github.com/codejsha/spring-rest-sakila
 - Java 17
 - Gradle 8
 - MySQL 8
-- Apache Kafka 3
+<!-- - Apache Kafka 3 -->
 
 ### Libraries and Plugins
 
@@ -40,7 +40,6 @@ For a complete list, see the `gradle/libs.versions.toml` file.
 - Spring WebFlux
 - Spring Data R2DBC
 - Google gRPC
-- MapStruct
 
 ## Architecture
 
@@ -57,7 +56,7 @@ Each service has its own database.
 ![catalog-application](diagram/component/catalog-application.svg)
 
 ![customer-application](diagram/component/customer-application.svg)
-![payment-application](diagram/component/catalog-application.svg)
+![payment-application](diagram/component/payment-application.svg)
 ![rental-application](diagram/component/rental-application.svg)
 ![store-application](diagram/component/store-application.svg)
 ![staff-application](diagram/component/staff-application.svg)
