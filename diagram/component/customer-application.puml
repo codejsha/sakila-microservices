@@ -17,7 +17,7 @@ Container_Boundary(customer_app, "Customer Application") {
     Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
     Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
     Component(grpc, "gRPC", "gRPC Adapter", "grpc")
-    Component(payment_service, "Payment Service", "Java, Spring Boot", "service")
+    Component(payment_service, "Payment Service", "Spring Bean", "service")
     Component(payment_repository, "Payment Repository", "R2DBC Repository", "repository")
     ComponentDb(payment_db, "Payment Database", "MySQL", "catalog", $tags = "storage")
 

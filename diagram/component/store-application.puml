@@ -16,7 +16,7 @@ Container_Boundary(staff_app, "Staff Application") {
     Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
     Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
     Component(grpc, "gRPC", "gRPC Adapter", "grpc")
-    Component(staff_service, "Staff Service", "Java, Spring Boot", "service")
+    Component(staff_service, "Staff Service", "Spring Bean", "service")
     Component(staff_repository, "Staff Repository", "R2DBC Repository", "repository")
     ComponentDb(staff_db, "Staff Database", "MySQL", "catalog", $tags = "storage")
 

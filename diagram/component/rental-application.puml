@@ -15,7 +15,7 @@ Container_Boundary(rental_app, "Rental Application") {
     Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
     Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
     Component(grpc, "gRPC", "gRPC Adapter", "grpc")
-    Component(rental_service, "Rental Service", "Java, Spring Boot", "service")
+    Component(rental_service, "Rental Service", "Spring Bean", "service")
     Component(rental_repository, "Rental Repository", "R2DBC Repository", "repository")
     ComponentDb(rental_db, "Rental Database", "MySQL", "catalog", $tags = "storage")
 

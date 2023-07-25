@@ -15,7 +15,7 @@ Container_Boundary(location_app, "Location Application") {
     Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
     Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
     Component(grpc, "gRPC", "gRPC Adapter", "grpc")
-    Component(location_service, "location Service", "Java, Spring Boot", "service")
+    Component(location_service, "location Service", "Spring Bean", "service")
     Component(location_repository, "location Repository", "R2DBC Repository", "repository")
     ComponentDb(location_db, "location Database", "MySQL", "catalog", $tags = "storage")
 
