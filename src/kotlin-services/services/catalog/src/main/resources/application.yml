@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  r2dbc:
+    pool:
+      initial-size: 10
+      max-size: 10
+    url: r2dbc:mysql://localhost:3306/sakila
+    username: sakila
+    password: sakila
+
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+    jmx:
+      exposure:
+        exclude: "*"

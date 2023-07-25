@@ -1,0 +1,38 @@
+@startuml "store-application"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+AddElementTag("micro_service", $shape=EightSidedShape(), $bgColor="CornflowerBlue", $fontColor="black", $legendText="micro service\neight sided")
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="black")
+
+title Component diagram for Store Application
+
+Container(rental_app, "Rental Application", "Java, Spring Boot", "rental", $tags = "micro_service")
+Container(payment_app, "Payment Application", "Java, Spring Boot", "payment", $tags = "micro_service")
+Container(catalog_app, "Catalog Application", "Java, Spring Boot", "catalog", $tags = "micro_service")
+Container(location_app, "Location Application", "Java, Spring Boot", "location", $tags = "micro_service")
+System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
+
+Container_Boundary(staff_app, "Staff Application") {
+    Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
+    Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
+    Component(grpc, "gRPC", "gRPC Adapter", "grpc")
+    Component(staff_service, "Staff Service", "Java, Spring Boot", "service")
+    Component(staff_repository, "Staff Repository", "R2DBC Repository", "repository")
+    ComponentDb(staff_db, "Staff Database", "MySQL", "catalog", $tags = "storage")
+
+    Rel(command_handler, staff_service, "Uses", "call")
+    Rel(query_handler, staff_service, "Uses", "call")
+    Rel(staff_service, staff_repository, "Uses", "call")
+    Rel(grpc, staff_service, "Uses", "call")
+    Rel_R(staff_repository, staff_db, "Reads from and writes to", "JDBC")
+}
+
+Rel(rental_app, grpc, "Uses", "gRPC")
+Rel(payment_app, grpc, "Uses", "gRPC")
+Rel(grpc, catalog_app, "Uses", "gRPC")
+Rel(grpc, location_app, "Uses", "gRPC")
+Rel(ingress_gateway, command_handler, "Uses", "HTTP")
+Rel(ingress_gateway, query_handler, "Uses", "HTTP")
+
+SHOW_LEGEND()
+@enduml

@@ -1,0 +1,36 @@
+@startuml "location-application"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+AddElementTag("micro_service", $shape=EightSidedShape(), $bgColor="CornflowerBlue", $fontColor="black", $legendText="micro service\neight sided")
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="black")
+
+title Component diagram for Payment Application
+
+Container(customer_app, "Customer Application", "Java, Spring Boot", "customer", $tags = "micro_service")
+Container(rental_app, "Store Application", "Java, Spring Boot", "store", $tags = "micro_service")
+Container(staff_app, "Staff Application", "Java, Spring Boot", "staff", $tags = "micro_service")
+System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
+
+Container_Boundary(payment_app, "Payment Application") {
+    Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
+    Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
+    Component(grpc, "gRPC", "gRPC Adapter", "grpc")
+    Component(payment_service, "Payment Service", "Java, Spring Boot", "service")
+    Component(payment_repository, "Payment Repository", "R2DBC Repository", "repository")
+    ComponentDb(payment_db, "Payment Database", "MySQL", "catalog", $tags = "storage")
+
+    Rel(command_handler, payment_service, "Uses", "call")
+    Rel(query_handler, payment_service, "Uses", "call")
+    Rel(payment_service, payment_repository, "Uses", "call")
+    Rel(grpc, payment_service, "Uses", "call")
+    Rel_R(payment_repository, payment_db, "Reads from and writes to", "JDBC")
+}
+
+Rel(customer_app, grpc, "Uses", "gRPC")
+Rel(rental_app, grpc, "Uses", "gRPC")
+Rel(staff_app, grpc, "Uses", "gRPC")
+Rel(ingress_gateway, command_handler, "Uses", "HTTP")
+Rel(ingress_gateway, query_handler, "Uses", "HTTP")
+
+SHOW_LEGEND()
+@enduml

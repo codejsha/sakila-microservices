@@ -1,0 +1,36 @@
+@startuml "sakila-container"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+AddElementTag("micro_service", $shape=EightSidedShape(), $bgColor="CornflowerBlue", $fontColor="black", $legendText="micro service\neight sided")
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="black")
+
+title Container diagram for Sakila DVD Rental Store
+
+System_Boundary(sakila, "Sakila Rental System") {
+    Container(catalog_app, "Catalog Application", "Java, Spring Boot", "actor and movie", $tags = "micro_service")
+    Container(customer_app, "Customer Application", "Java, Spring Boot", "customer", $tags = "micro_service")
+    Container(location_app, "Location Application", "Java, Spring Boot", "location", $tags = "micro_service")
+    Container(payment_app, "Payment Application", "Java, Spring Boot", "payment", $tags = "micro_service")
+    Container(rental_app, "Rental Application", "Java, Spring Boot", "rental", $tags = "micro_service")
+    Container(staff_app, "Staff Application", "Java, Spring Boot", "staff", $tags = "micro_service")
+    Container(store_app, "Store Application", "Java, Spring Boot", "store", $tags = "micro_service")
+}
+
+Rel_D(customer_app, location_app, "Uses", "gRPC")
+BiRel(customer_app, payment_app, "Uses", "gRPC")
+BiRel(customer_app, rental_app, "Uses", "gRPC")
+BiRel(customer_app, store_app, "Uses", "gRPC")
+
+BiRel_R(payment_app, rental_app, "Uses", "gRPC")
+BiRel(payment_app, staff_app, "Uses", "gRPC")
+
+Rel(rental_app, staff_app, "Uses", "gRPC")
+
+Rel_D(staff_app, location_app, "Uses", "gRPC")
+BiRel_R(staff_app, store_app, "Uses", "gRPC")
+
+Rel(store_app, catalog_app, "Uses", "gRPC")
+Rel_D(store_app, location_app, "Uses", "gRPC")
+
+SHOW_LEGEND()
+@enduml

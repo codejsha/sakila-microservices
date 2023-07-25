@@ -6,6 +6,7 @@ pluginManagement {
     }
 }
 
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -15,17 +16,20 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "kotlin-services"
-include("services:catalog-service")
-findProject(":services:catalog-service")?.name = "catalog-service"
-include("services:customer-service")
-findProject(":services:customer-service")?.name = "customer-service"
-include("services:location-service")
-findProject(":services:location-service")?.name = "location-service"
-include("services:payment-service")
-findProject(":services:payment-service")?.name = "payment-service"
-include("services:rental-service")
-findProject(":services:rental-service")?.name = "rental-service"
-include("services:staff-service")
-findProject(":services:staff-service")?.name = "staff-service"
-include("services:store-service")
-findProject(":services:store-service")?.name = "store-service"
+include("shared")
+findProject(":shared")?.name = "shared"
+include("services:catalog")
+findProject(":services:catalog")?.name = "catalog"
+include("services:customer")
+findProject(":services:customer")?.name = "customer"
+include("services:location")
+findProject(":services:location")?.name = "location"
+include("services:payment")
+findProject(":services:payment")?.name = "payment"
+include("services:rental")
+findProject(":services:rental")?.name = "rental"
+include("services:staff")
+findProject(":services:staff")?.name = "staff"
+include("services:store")
+findProject(":services:store")?.name = "store"
+include("shared")

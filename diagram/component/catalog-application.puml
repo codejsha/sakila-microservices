@@ -1,0 +1,41 @@
+@startuml "catalog-application"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+AddElementTag("micro_service", $shape=EightSidedShape(), $bgColor="CornflowerBlue", $fontColor="black", $legendText="micro service\neight sided")
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="black")
+
+title Component diagram for Catalog Application
+
+Container(store_app, "Store Application", "Java, Spring Boot", "store", $tags = "micro_service")
+System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
+
+Container_Boundary(catalog_app, "Catalog Application") {
+    Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
+    Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
+    Component(grpc, "gRPC", "gRPC Adapter", "grpc")
+    Component(actor_mgmt_service, "Actor Management Service", "Java, Spring Boot", "service")
+    Component(actor_search_service, "Actor Search Service", "Java, Spring Boot", "service")
+    Component(movie_mgmt_service, "Movie Management Service", "Java, Spring Boot", "service")
+    Component(movie_search_service, "Movie Search Service", "Java, Spring Boot", "service")
+    Component(catalog_repository, "Catalog Repository", "R2DBC Repository", "repository")
+    ComponentDb(catalog_db, "Catalog Database", "MySQL", "catalog", $tags = "storage")
+
+    Rel(command_handler, actor_mgmt_service, "Uses", "call")
+    Rel(command_handler, movie_mgmt_service, "Uses", "call")
+    Rel(query_handler, actor_search_service, "Uses", "call")
+    Rel(query_handler, movie_search_service, "Uses", "call")
+    Rel(actor_mgmt_service, catalog_repository, "Uses", "call")
+    Rel(movie_mgmt_service, catalog_repository, "Uses", "call")
+    Rel(actor_search_service, catalog_repository, "Uses", "call")
+    Rel(movie_search_service, catalog_repository, "Uses", "call")
+    Rel(grpc, actor_search_service, "Uses", "call")
+    Rel(grpc, movie_search_service, "Uses", "call")
+    Rel_R(catalog_repository, catalog_db, "Reads from and writes to", "JDBC")
+}
+
+Rel(store_app, grpc, "Uses", "gRPC")
+Rel(ingress_gateway, command_handler, "Uses", "HTTP")
+Rel(ingress_gateway, query_handler, "Uses", "HTTP")
+
+SHOW_LEGEND()
+@enduml

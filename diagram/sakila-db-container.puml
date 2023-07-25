@@ -1,0 +1,36 @@
+@startuml "sakila-db-container"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+AddElementTag("micro_service", $shape=EightSidedShape(), $bgColor="CornflowerBlue", $fontColor="black", $legendText="micro service\neight sided")
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="black")
+
+title Container diagram with each database for Sakila DVD Rental Store
+
+System_Boundary(sakila, "Sakila Rental System") {
+    Container(catalog_service, "Catalog Service", "Java, Spring Boot", "actor and movie", $tags = "micro_service")
+    Container(customer_service, "Customer Service", "Java, Spring Boot", "customer", $tags = "micro_service")
+    Container(location_service, "Location Service", "Java, Spring Boot", "location", $tags = "micro_service")
+    Container(payment_service, "Payment Service", "Java, Spring Boot", "payment", $tags = "micro_service")
+    Container(rental_service, "Rental Service", "Java, Spring Boot", "rental", $tags = "micro_service")
+    Container(staff_service, "Staff Service", "Java, Spring Boot", "staff", $tags = "micro_service")
+    Container(store_service, "Store Service", "Java, Spring Boot", "store", $tags = "micro_service")
+
+    ContainerDb(catalog_db, "Catalog Database", "MySQL", "Stores catalog information", $tags = "storage")
+    ContainerDb(customer_db, "Customer Database", "MySQL", "Stores customer information", $tags = "storage")
+    ContainerDb(location_db, "Location Database", "MySQL", "Stores location information", $tags = "storage")
+    ContainerDb(payment_db, "Payment Database", "MySQL", "Stores payment information", $tags = "storage")
+    ContainerDb(rental_db, "Rental Database", "MySQL", "Stores rental information", $tags = "storage")
+    ContainerDb(staff_db, "Staff Database", "MySQL", "Stores staff information", $tags = "storage")
+    ContainerDb(store_db, "Store Database", "MySQL", "Stores store information", $tags = "storage")
+}
+
+BiRel(catalog_service, catalog_db, "Reads from and writes to", "JDBC")
+BiRel(customer_service, customer_db, "Reads from and writes to", "JDBC")
+BiRel(location_service, location_db, "Reads from and writes to", "JDBC")
+BiRel(payment_service, payment_db, "Reads from and writes to", "JDBC")
+BiRel(rental_service, rental_db, "Reads from and writes to", "JDBC")
+BiRel(staff_service, staff_db, "Reads from and writes to", "JDBC")
+BiRel(store_service, store_db, "Reads from and writes to", "JDBC")
+
+SHOW_LEGEND()
+@enduml

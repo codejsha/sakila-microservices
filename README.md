@@ -2,9 +2,12 @@
 
 Sakila REST API Microservices (Sample Project)
 
+:exclamation: This project is work in progress.
+
 ![Gradle Build](https://github.com/codejsha/sakila-microservices/actions/workflows/gradle.yml/badge.svg)
 
-This project provides rental operations for the Sakila DVD Rental Store using microservices architecture. It's based on the Sakila sample database and serves as a example resource.
+This project provides rental operations for the Sakila DVD Rental Store using microservices architecture. It is implemented with hexagonal architecture(ports and adapters architecture) and reactive programming.
+It's based on the Sakila sample database and serves as a example resource.
 
 Monolith version is go to: https://github.com/codejsha/spring-rest-sakila
 
@@ -15,6 +18,7 @@ Monolith version is go to: https://github.com/codejsha/spring-rest-sakila
   - [Requirements](#requirements)
   - [Libraries and Plugins](#libraries-and-plugins)
 - [Architecture](#architecture)
+  - [Services](#services)
 - [Roadmap](#roadmap)
 - [Sample Data](#sample-data)
 - [References](#references)
@@ -35,73 +39,35 @@ For a complete list, see the `gradle/libs.versions.toml` file.
 
 - Spring WebFlux
 - Spring Data R2DBC
+- Google gRPC
 - MapStruct
 
 ## Architecture
 
 The following diagram shows the architecture of the Sakila DVD Rental Store. The diagram is based on the [C4 model](https://c4model.com/).
 
-```mermaid
-C4Container
-    title Architecture Diagram for Sakila DVD Rental Store
+![sakila-container](diagram/sakila-container.svg)
 
-    Person(manager, "Manager")
+Each service has its own database.
 
-    System_Boundary(sakila, "Sakila System") {
-        Container(catalogService, "Catalog Service")
-        ContainerDb(catalogDb, "Catalog Database", "MySQL")
-        Container(customerService, "Customer Service")
-        ContainerDb(customerDb, "Customer Database", "MySQL")
-        Container(paymentService, "Payment Service")
-        ContainerDb(paymentDb, "Payment Database", "MySQL")
-        Container(rentalService, "Rental Service")
-        ContainerDb(rentalDb, "Rental Database", "MySQL")
-        Container(staffService, "Staff Service")
-        ContainerDb(staffDb, "Staff Database", "MySQL")
-        Container(storeService, "Store Service")
-        ContainerDb(storeDb, "Store Database", "MySQL")
-        Container(locationService, "Location Service")
-        ContainerDb(locationDb, "Location Database", "MySQL")
-    }
+![sakila-db-container](diagram/sakila-db-container.svg)
 
+### Services
 
-    Rel(manager, catalogService, "manages")
-    Rel(manager, customerService, "manages")
-    Rel(manager, rentalService, "manages")
-    Rel(manager, paymentService, "manages")
-    Rel(manager, storeService, "manages")
+![catalog-application](diagram/component/catalog-application.svg)
 
-    Rel(catalogService, catalogDb, "read/write")
-
-    Rel(customerService, locationService, "uses")
-    BiRel(customerService, paymentService, "uses")
-    BiRel(customerService, rentalService, "uses")
-    BiRel(customerService, storeService, "uses")
-    Rel(customerService, customerDb, "read/write")
-
-    BiRel(locationService, staffService, "uses")
-    BiRel(locationService, storeService, "uses")
-    Rel(locationService, locationDb, "read/write")
-
-    BiRel(paymentService, rentalService, "uses")
-    BiRel(paymentService, staffService, "uses")
-    Rel(paymentService, paymentDb, "read/write")
-
-    BiRel(rentalService, staffService, "uses")
-    Rel(rentalService, rentalDb, "read/write")
-
-    BiRel(staffService, storeService, "uses")
-    Rel(staffService, staffDb, "read/write")
-
-    Rel(storeService, catalogService, "uses")
-    Rel(storeService, storeDb, "read/write")
-
-    UpdateLayoutConfig($c4ShapeInRow="4")
-```
+![customer-application](diagram/component/customer-application.svg)
+![payment-application](diagram/component/catalog-application.svg)
+![rental-application](diagram/component/rental-application.svg)
+![store-application](diagram/component/store-application.svg)
+![staff-application](diagram/component/staff-application.svg)
+<!-- ![catalog-application](diagram/component/catalog-application.svg) -->
+![location-application](diagram/component/location-application.svg)
 
 ## Roadmap
 
 - [ ] Implement all services
+- [ ] Add gRPC, Kafka communication
 - [ ] Add tests for REST Docs and OpenAPI spec
 - [ ] Add Netflix Conductor for orchestration
 - [ ] Add Helm charts for each service
