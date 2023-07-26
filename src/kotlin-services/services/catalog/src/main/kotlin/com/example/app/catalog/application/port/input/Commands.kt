@@ -4,42 +4,42 @@ import com.example.app.catalog.domain.dto.ActorAddRequestDto
 import com.example.app.catalog.domain.dto.ActorNameUpdateRequestDto
 import com.example.app.catalog.domain.dto.MovieAddRequestDto
 import com.example.app.catalog.domain.dto.MovieUpdateRequestDto
-import com.example.shared.cqrs.PortCommand
+import com.example.shared.cqrs.CommandPort
 
 // actor
 
-interface AddActorCommand : PortCommand {
+interface AddActorCommand : CommandPort {
     fun execute(actorAddRequestDto: ActorAddRequestDto)
 }
 
-interface UpdateActorNameCommand : PortCommand {
+interface UpdateActorNameCommand : CommandPort {
     fun execute(id: Int, actorNameUpdateRequestDto: ActorNameUpdateRequestDto)
 }
 
-interface DeleteActorCommand : PortCommand {
+interface DeleteActorCommand : CommandPort {
     fun execute(id: Int)
 }
 
 // movie
 
-interface AddMovieCommand : PortCommand {
+interface AddMovieCommand : CommandPort {
     fun execute(id: Int, movieAddRequestDto: MovieAddRequestDto)
 }
 
-interface UpdateMovieCommand : PortCommand {
+interface UpdateMovieCommand : CommandPort {
     fun execute(id: Int, movieUpdateRequestDto: MovieUpdateRequestDto)
 }
 
-interface DeleteMovieCommand : PortCommand {
+interface DeleteMovieCommand : CommandPort {
     fun execute(id: Int)
 }
 
 // move cast
 
-interface IncludeActorInMovieActorCommand : PortCommand {
+interface IncludeActorInMovieActorCommand : CommandPort {
     fun execute(movieId: Int, actorId: Int)
 }
 
-interface ExcludeActorInMovieActorCommand : PortCommand {
+interface ExcludeActorInMovieActorCommand : CommandPort {
     fun execute(movieId: Int, actorId: Int)
 }

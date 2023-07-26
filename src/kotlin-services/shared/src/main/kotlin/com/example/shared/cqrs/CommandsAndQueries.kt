@@ -1,13 +1,13 @@
 package com.example.shared.cqrs
 
-interface PortCommand
+interface CommandPort
 
-interface PortCommandHandler<C : PortCommand> {
+interface CommandPortHandler<C : CommandPort> {
     fun handle(command: C)
 }
 
-interface PortQuery<R>
+interface QueryPort<R>
 
-interface PortQueryHandler<Q : PortQuery<R>, R> {
+interface QueryPortHandler<Q : QueryPort<R>, R> {
     fun handle(query: Q): R
 }
