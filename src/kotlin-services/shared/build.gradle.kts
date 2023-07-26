@@ -10,6 +10,7 @@ buildscript {
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
+    id("java")
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.spring)
