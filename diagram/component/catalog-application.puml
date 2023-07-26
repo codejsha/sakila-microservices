@@ -7,7 +7,7 @@ AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fon
 title Component diagram for Catalog Application
 
 Container(store_app, "Store Application", "Java, Spring Boot", "app", $tags = "micro_service")
-System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
+System_Ext(ingress_gateway, "API Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(catalog_app, "Catalog Application") {
     Component(command_adapter, "Catalog Command Adapter", "REST Handler Adapter", "handler")

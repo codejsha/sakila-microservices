@@ -9,7 +9,7 @@ title Component diagram for Rental Application
 Container(customer_app, "Customer Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(payment_app, "Payment Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(staff_app, "Staff Application", "Java, Spring Boot", "app", $tags = "micro_service")
-System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
+System_Ext(ingress_gateway, "API Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(rental_app, "Rental Application") {
     Component(command_adapter, "Rental Command Adapter", "REST Handler Adapter", "handler")

@@ -9,10 +9,10 @@ title Component diagram for Location Application
 Container(customer_app, "Customer Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(store_app, "Store Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(staff_app, "Staff Application", "Java, Spring Boot", "app", $tags = "micro_service")
-System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
+System_Ext(ingress_gateway, "API Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(location_app, "Location Application") {
-    Component(query_adapter, "Location Query Handler", "REST Handler Adapter", "handler")
+    Component(query_adapter, "Location Query Adapter", "REST Handler Adapter", "handler")
     Component(location_search_adapter, "Location Search Adapter", "gRPC Adapter", "grpc")
 
     Component(location_service, "Location Search Service", "Spring Bean", "service")

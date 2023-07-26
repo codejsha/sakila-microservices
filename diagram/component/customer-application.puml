@@ -9,7 +9,7 @@ title Component diagram for Customer Application
 Container(rental_app, "Rental Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(payment_app, "Payment Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(store_app, "Store Application", "Java, Spring Boot", "app", $tags = "micro_service")
-System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
+System_Ext(ingress_gateway, "API Gateway", "Istio Ingress Gateway")
 
 Container(location_app, "Location Application", "Java, Spring Boot", "app", $tags = "micro_service")
 

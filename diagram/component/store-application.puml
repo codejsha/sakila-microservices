@@ -11,7 +11,7 @@ Container(staff_app, "Staff Application", "Java, Spring Boot", "app", $tags = "m
 Container(payment_app, "Payment Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(catalog_app, "Catalog Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(location_app, "Location Application", "Java, Spring Boot", "app", $tags = "micro_service")
-System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
+System_Ext(ingress_gateway, "API Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(store_app, "Store Application") {
     Component(command_adapter, "Store Command Adapter", "REST Handler Adapter", "handler")
