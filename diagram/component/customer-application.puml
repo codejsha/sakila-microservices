@@ -48,5 +48,4 @@ Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
 
 Rel(location_search_adapter, location_app, "Uses", "gRPC")
 
-SHOW_LEGEND()
 @enduml

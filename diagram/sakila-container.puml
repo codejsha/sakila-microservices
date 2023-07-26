@@ -33,5 +33,4 @@ BiRel_R(staff_app, store_app, "Uses", "gRPC")
 Rel(store_app, catalog_app, "Uses", "gRPC")
 Rel_D(store_app, location_app, "Uses", "gRPC")
 
-SHOW_LEGEND()
 @enduml

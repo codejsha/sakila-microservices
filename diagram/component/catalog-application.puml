@@ -44,5 +44,4 @@ Rel(store_app, movie_search_adapter, "Uses", "gRPC")
 Rel(ingress_gateway, command_adapter, "Uses", "HTTP")
 Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
 
-SHOW_LEGEND()
 @enduml

@@ -32,5 +32,4 @@ BiRel(rental_service, rental_db, "Reads from and writes to", "JDBC")
 BiRel(staff_service, staff_db, "Reads from and writes to", "JDBC")
 BiRel(store_service, store_db, "Reads from and writes to", "JDBC")
 
-SHOW_LEGEND()
 @enduml

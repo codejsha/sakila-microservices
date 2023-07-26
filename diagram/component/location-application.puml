@@ -33,5 +33,4 @@ Rel(store_app, location_search_adapter, "Uses", "gRPC")
 Rel(staff_app, location_search_adapter, "Uses", "gRPC")
 Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
 
-SHOW_LEGEND()
 @enduml
