@@ -6,36 +6,43 @@ AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fon
 
 title Component diagram for Catalog Application
 
-Container(store_app, "Store Application", "Java, Spring Boot", "store", $tags = "micro_service")
+Container(store_app, "Store Application", "Java, Spring Boot", "app", $tags = "micro_service")
 System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(catalog_app, "Catalog Application") {
-    Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
-    Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
-    Component(grpc, "gRPC", "gRPC Adapter", "grpc")
+    Component(command_adapter, "Catalog Command Adapter", "REST Handler Adapter", "handler")
+    Component(query_adapter, "Catalog Query Adapter", "REST Handler Adapter", "handler")
+    Component(movie_search_adapter, "Movie Search Adapter", "gRPC Adapter", "grpc")
+
     Component(actor_mgmt_service, "Actor Management Service", "Spring Bean", "service")
     Component(actor_search_service, "Actor Search Service", "Spring Bean", "service")
     Component(movie_mgmt_service, "Movie Management Service", "Spring Bean", "service")
     Component(movie_search_service, "Movie Search Service", "Spring Bean", "service")
-    Component(catalog_repository, "Catalog Repository", "R2DBC Repository", "repository")
-    ComponentDb(catalog_db, "Catalog Database", "MySQL", "catalog", $tags = "storage")
+    Component(movie_actor_mgmt_service, "Movie Actor Management Service", "Spring Bean", "service")
 
-    Rel(command_handler, actor_mgmt_service, "Uses", "call")
-    Rel(command_handler, movie_mgmt_service, "Uses", "call")
-    Rel(query_handler, actor_search_service, "Uses", "call")
-    Rel(query_handler, movie_search_service, "Uses", "call")
+    Component(catalog_repository, "Catalog Repository", "R2DBC Repository", "repository")
+    ComponentDb(catalog_db, "Catalog Database", "MySQL", "data", $tags = "storage")
+
+    Rel(command_adapter, actor_mgmt_service, "Uses", "call")
+    Rel(command_adapter, movie_mgmt_service, "Uses", "call")
+    Rel(command_adapter, movie_actor_mgmt_service, "Uses", "call")
+    Rel(query_adapter, actor_search_service, "Uses", "call")
+    Rel(query_adapter, movie_search_service, "Uses", "call")
+    Rel(movie_search_adapter, actor_search_service, "Uses", "call")
+    Rel(movie_search_adapter, movie_search_service, "Uses", "call")
+
     Rel(actor_mgmt_service, catalog_repository, "Uses", "call")
     Rel(movie_mgmt_service, catalog_repository, "Uses", "call")
+    Rel(movie_actor_mgmt_service, catalog_repository, "Uses", "call")
     Rel(actor_search_service, catalog_repository, "Uses", "call")
     Rel(movie_search_service, catalog_repository, "Uses", "call")
-    Rel(grpc, actor_search_service, "Uses", "call")
-    Rel(grpc, movie_search_service, "Uses", "call")
+
     Rel_R(catalog_repository, catalog_db, "Reads from and writes to", "JDBC")
 }
 
-Rel(store_app, grpc, "Uses", "gRPC")
-Rel(ingress_gateway, command_handler, "Uses", "HTTP")
-Rel(ingress_gateway, query_handler, "Uses", "HTTP")
+Rel(store_app, movie_search_adapter, "Uses", "gRPC")
+Rel(ingress_gateway, command_adapter, "Uses", "HTTP")
+Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
 
 SHOW_LEGEND()
 @enduml

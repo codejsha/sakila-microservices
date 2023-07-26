@@ -23,6 +23,7 @@ BiRel(customer_app, store_app, "Uses", "gRPC")
 
 BiRel_R(payment_app, rental_app, "Uses", "gRPC")
 BiRel(payment_app, staff_app, "Uses", "gRPC")
+BiRel(payment_app, store_app, "Uses", "gRPC")
 
 Rel(rental_app, staff_app, "Uses", "gRPC")
 

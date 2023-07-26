@@ -53,14 +53,12 @@ Each service has its own database.
 
 ### Services
 
-![catalog-application](diagram/component/catalog-application.svg)
-
 ![customer-application](diagram/component/customer-application.svg)
 ![payment-application](diagram/component/payment-application.svg)
 ![rental-application](diagram/component/rental-application.svg)
 ![store-application](diagram/component/store-application.svg)
 ![staff-application](diagram/component/staff-application.svg)
-<!-- ![catalog-application](diagram/component/catalog-application.svg) -->
+![catalog-application](diagram/component/catalog-application.svg)
 ![location-application](diagram/component/location-application.svg)
 
 ## Roadmap

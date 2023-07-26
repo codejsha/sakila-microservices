@@ -6,34 +6,47 @@ AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fon
 
 title Component diagram for Customer Application
 
-Container(customer_app, "Customer Application", "Java, Spring Boot", "customer", $tags = "micro_service")
-Container(rental_app, "Rental Application", "Java, Spring Boot", "rental", $tags = "micro_service")
-Container(payment_app, "Payment Application", "Java, Spring Boot", "payment", $tags = "micro_service")
-Container(staff_app, "Staff Application", "Java, Spring Boot", "staff", $tags = "micro_service")
-Container(location_app, "Location Application", "Java, Spring Boot", "location", $tags = "micro_service")
+Container(rental_app, "Rental Application", "Java, Spring Boot", "app", $tags = "micro_service")
+Container(payment_app, "Payment Application", "Java, Spring Boot", "app", $tags = "micro_service")
+Container(store_app, "Store Application", "Java, Spring Boot", "app", $tags = "micro_service")
 System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
 
-Container_Boundary(customer_app, "Customer Application") {
-    Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
-    Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
-    Component(grpc, "gRPC", "gRPC Adapter", "grpc")
-    Component(payment_service, "Payment Service", "Spring Bean", "service")
-    Component(payment_repository, "Payment Repository", "R2DBC Repository", "repository")
-    ComponentDb(payment_db, "Payment Database", "MySQL", "catalog", $tags = "storage")
+Container(location_app, "Location Application", "Java, Spring Boot", "app", $tags = "micro_service")
 
-    Rel(command_handler, payment_service, "Uses", "call")
-    Rel(query_handler, payment_service, "Uses", "call")
-    Rel(payment_service, payment_repository, "Uses", "call")
-    Rel(grpc, payment_service, "Uses", "call")
-    Rel_R(payment_repository, payment_db, "Reads from and writes to", "JDBC")
+Container_Boundary(customer_app, "Customer Application") {
+    Component(command_adapter, "Customer Command Adapter", "REST Handler Adapter", "handler")
+    Component(query_adapter, "Customer Query Adapter", "REST Handler Adapter", "handler")
+    Component(customer_search_adapter, "Customer Search Adapter", "gRPC Adapter", "grpc")
+    Component(location_search_adapter, "Location Search Adapter", "gRPC Adapter", "grpc")
+
+    Component(customer_mgmt_service, "Customer Management Service", "Spring Bean", "service")
+    Component(customer_search_service, "Customer Search Service", "Spring Bean", "service")
+    Component(my_infomation_service, "My Infomation Service", "Spring Bean", "service")
+
+    Component(customer_repository, "Customer Repository", "R2DBC Repository", "repository")
+    ComponentDb(customer_db, "Customer Database", "MySQL", "data", $tags = "storage")
+
+    Rel(command_adapter, customer_mgmt_service, "Uses", "call")
+    Rel(query_adapter, customer_search_service, "Uses", "call")
+    Rel(query_adapter, my_infomation_service, "Uses", "call")
+    Rel(customer_search_adapter, customer_search_service, "Uses", "call")
+
+    Rel(customer_mgmt_service, customer_repository, "Uses", "call")
+    Rel(customer_mgmt_service, location_search_adapter, "Uses", "call")
+    Rel(customer_search_service, customer_repository, "Uses", "call")
+    Rel(customer_search_service, location_search_adapter, "Uses", "call")
+    Rel_R(my_infomation_service, customer_search_service, "Uses", "call")
+
+    Rel_R(customer_repository, customer_db, "Reads from and writes to", "JDBC")
 }
 
-Rel(rental_app, grpc, "Uses", "gRPC")
-Rel(payment_app, grpc, "Uses", "gRPC")
-Rel(staff_app, grpc, "Uses", "gRPC")
-Rel(grpc, location_app, "Uses", "gRPC")
-Rel(ingress_gateway, command_handler, "Uses", "HTTP")
-Rel(ingress_gateway, query_handler, "Uses", "HTTP")
+Rel(rental_app, customer_search_adapter, "Uses", "gRPC")
+Rel(payment_app, customer_search_adapter, "Uses", "gRPC")
+Rel(store_app, customer_search_adapter, "Uses", "gRPC")
+Rel(ingress_gateway, command_adapter, "Uses", "HTTP")
+Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
+
+Rel(location_search_adapter, location_app, "Uses", "gRPC")
 
 SHOW_LEGEND()
 @enduml

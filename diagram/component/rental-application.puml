@@ -6,31 +6,37 @@ AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fon
 
 title Component diagram for Rental Application
 
-Container(customer_app, "Customer Application", "Java, Spring Boot", "customer", $tags = "micro_service")
-Container(payment_app, "Store Application", "Java, Spring Boot", "store", $tags = "micro_service")
-Container(staff_app, "Staff Application", "Java, Spring Boot", "staff", $tags = "micro_service")
+Container(customer_app, "Customer Application", "Java, Spring Boot", "app", $tags = "micro_service")
+Container(payment_app, "Payment Application", "Java, Spring Boot", "app", $tags = "micro_service")
+Container(staff_app, "Staff Application", "Java, Spring Boot", "app", $tags = "micro_service")
 System_Ext(ingress_gateway, "Ingress Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(rental_app, "Rental Application") {
-    Component(command_handler, "Web Command Handler", "Rest Handler", "handler")
-    Component(query_handler, "Web Query Handler", "Rest Handler", "handler")
-    Component(grpc, "gRPC", "gRPC Adapter", "grpc")
-    Component(rental_service, "Rental Service", "Spring Bean", "service")
-    Component(rental_repository, "Rental Repository", "R2DBC Repository", "repository")
-    ComponentDb(rental_db, "Rental Database", "MySQL", "catalog", $tags = "storage")
+    Component(command_adapter, "Rental Command Adapter", "REST Handler Adapter", "handler")
+    Component(query_adapter, "Rental Query Adapter", "REST Handler Adapter", "handler")
+    Component(rental_search_adapter, "Rental Search Adapter", "gRPC Adapter", "grpc")
 
-    Rel(command_handler, rental_service, "Uses", "call")
-    Rel(query_handler, rental_service, "Uses", "call")
-    Rel(rental_service, rental_repository, "Uses", "call")
-    Rel(grpc, rental_service, "Uses", "call")
+    Component(rental_mgmt_service, "Rental Management Service", "Spring Bean", "service")
+    Component(rental_search_service, "Rental Search Service", "Spring Bean", "service")
+    Component(rental_repository, "Rental Repository", "R2DBC Repository", "repository")
+
+    ComponentDb(rental_db, "Rental Database", "MySQL", "data", $tags = "storage")
+
+    Rel(command_adapter, rental_mgmt_service, "Uses", "call")
+    Rel(query_adapter, rental_search_service, "Uses", "call")
+    Rel(rental_search_adapter, rental_search_service, "Uses", "call")
+
+    Rel(rental_mgmt_service, rental_repository, "Uses", "call")
+    Rel(rental_search_service, rental_repository, "Uses", "call")
+
     Rel_R(rental_repository, rental_db, "Reads from and writes to", "JDBC")
 }
 
-Rel(customer_app, grpc, "Uses", "gRPC")
-Rel(payment_app, grpc, "Uses", "gRPC")
-Rel(staff_app, grpc, "Uses", "gRPC")
-Rel(ingress_gateway, command_handler, "Uses", "HTTP")
-Rel(ingress_gateway, query_handler, "Uses", "HTTP")
+Rel(customer_app, rental_search_adapter, "Uses", "gRPC")
+Rel(payment_app, rental_search_adapter, "Uses", "gRPC")
+Rel(staff_app, rental_search_adapter, "Uses", "gRPC")
+Rel(ingress_gateway, command_adapter, "Uses", "HTTP")
+Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
 
 SHOW_LEGEND()
 @enduml
