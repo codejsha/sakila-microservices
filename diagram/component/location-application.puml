@@ -8,7 +8,6 @@ title Component diagram for Location Application
 
 Container(customer_app, "Customer Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(store_app, "Store Application", "Java, Spring Boot", "app", $tags = "micro_service")
-Container(staff_app, "Staff Application", "Java, Spring Boot", "app", $tags = "micro_service")
 System_Ext(ingress_gateway, "API Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(location_app, "Location Application") {
@@ -30,7 +29,6 @@ Container_Boundary(location_app, "Location Application") {
 
 Rel(customer_app, location_search_adapter, "Uses", "gRPC")
 Rel(store_app, location_search_adapter, "Uses", "gRPC")
-Rel(staff_app, location_search_adapter, "Uses", "gRPC")
 Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
 
 @enduml

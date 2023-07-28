@@ -1,4 +1,4 @@
--- Sakila Sample Database Schema (for security tables)
+-- Security Sample Database Schema
 -- This is written for microservices application.
 
 -- Copyright 2023 Jinseong Ha
@@ -20,9 +20,9 @@ SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0;
 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL';
 
-DROP SCHEMA IF EXISTS sakila;
-CREATE SCHEMA sakila;
-USE sakila;
+DROP SCHEMA IF EXISTS security;
+CREATE SCHEMA security;
+USE security;
 
 --
 -- Table structure for table `authority`

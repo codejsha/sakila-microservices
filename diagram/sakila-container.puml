@@ -12,7 +12,6 @@ System_Boundary(sakila, "Sakila Rental System") {
     Container(location_app, "Location Application", "Java, Spring Boot", "location", $tags = "micro_service")
     Container(payment_app, "Payment Application", "Java, Spring Boot", "payment", $tags = "micro_service")
     Container(rental_app, "Rental Application", "Java, Spring Boot", "rental", $tags = "micro_service")
-    Container(staff_app, "Staff Application", "Java, Spring Boot", "staff", $tags = "micro_service")
     Container(store_app, "Store Application", "Java, Spring Boot", "store", $tags = "micro_service")
 }
 
@@ -22,15 +21,11 @@ BiRel(customer_app, rental_app, "Uses", "gRPC")
 BiRel(customer_app, store_app, "Uses", "gRPC")
 
 BiRel_R(payment_app, rental_app, "Uses", "gRPC")
-BiRel(payment_app, staff_app, "Uses", "gRPC")
 BiRel(payment_app, store_app, "Uses", "gRPC")
 
-Rel(rental_app, staff_app, "Uses", "gRPC")
+Rel(rental_app, store_app, "Uses", "gRPC")
 
-Rel_D(staff_app, location_app, "Uses", "gRPC")
-BiRel_R(staff_app, store_app, "Uses", "gRPC")
-
-Rel(store_app, catalog_app, "Uses", "gRPC")
-Rel_D(store_app, location_app, "Uses", "gRPC")
+Rel_L(store_app, catalog_app, "Uses", "gRPC")
+Rel_R(store_app, location_app, "Uses", "gRPC")
 
 @enduml

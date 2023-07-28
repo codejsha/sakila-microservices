@@ -8,7 +8,7 @@ title Component diagram for Rental Application
 
 Container(customer_app, "Customer Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(payment_app, "Payment Application", "Java, Spring Boot", "app", $tags = "micro_service")
-Container(staff_app, "Staff Application", "Java, Spring Boot", "app", $tags = "micro_service")
+Container(store_app, "Store Application", "Java, Spring Boot", "app", $tags = "micro_service")
 System_Ext(ingress_gateway, "API Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(rental_app, "Rental Application") {
@@ -34,7 +34,7 @@ Container_Boundary(rental_app, "Rental Application") {
 
 Rel(customer_app, rental_search_adapter, "Uses", "gRPC")
 Rel(payment_app, rental_search_adapter, "Uses", "gRPC")
-Rel(staff_app, rental_search_adapter, "Uses", "gRPC")
+Rel(store_app, rental_search_adapter, "Uses", "gRPC")
 Rel(ingress_gateway, command_adapter, "Uses", "HTTP")
 Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
 

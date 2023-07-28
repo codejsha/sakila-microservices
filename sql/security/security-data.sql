@@ -1,4 +1,4 @@
--- Sakila Sample Database Data (for security tables)
+-- Security Sample Database Data
 -- This is written for microservices application.
 
 -- Copyright 2023 Jinseong Ha
@@ -21,7 +21,7 @@ SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL';
 SET @old_autocommit = @@autocommit;
 
-USE sakila;
+USE security;
 
 --
 -- Dumping data for table `authority`

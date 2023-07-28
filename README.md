@@ -57,7 +57,6 @@ Each service has its own database.
 ![payment-application](diagram/component/payment-application.svg)
 ![rental-application](diagram/component/rental-application.svg)
 ![store-application](diagram/component/store-application.svg)
-![staff-application](diagram/component/staff-application.svg)
 ![catalog-application](diagram/component/catalog-application.svg)
 ![location-application](diagram/component/location-application.svg)
 

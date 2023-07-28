@@ -7,28 +7,38 @@ AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fon
 title Component diagram for Store Application
 
 Container(customer_app, "Customer Application", "Java, Spring Boot", "app", $tags = "micro_service")
-Container(staff_app, "Staff Application", "Java, Spring Boot", "app", $tags = "micro_service")
+Container(rental_app, "Rental Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(payment_app, "Payment Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(catalog_app, "Catalog Application", "Java, Spring Boot", "app", $tags = "micro_service")
 Container(location_app, "Location Application", "Java, Spring Boot", "app", $tags = "micro_service")
 System_Ext(ingress_gateway, "API Gateway", "Istio Ingress Gateway")
 
 Container_Boundary(store_app, "Store Application") {
-    Component(command_adapter, "Store Command Adapter", "REST Handler Adapter", "handler")
-    Component(query_adapter, "Store Query Adapter", "REST Handler Adapter", "handler")
+    Component(store_command_adapter, "Store Command Adapter", "REST Handler Adapter", "handler")
+    Component(store_query_adapter, "Store Query Adapter", "REST Handler Adapter", "handler")
     Component(store_search_adapter, "Store Search Adapter", "gRPC Adapter", "grpc")
+
+    Component(staff_command_adapter, "Staff Command Adapter", "REST Handler Adapter", "handler")
+    Component(staff_query_adapter, "Staff Query Adapter", "REST Handler Adapter", "handler")
+    Component(staff_search_adapter, "Staff Search Adapter", "gRPC Adapter", "grpc")
+
     Component(catalog_search_adapter, "Catalog Search Adapter", "gRPC Adapter", "grpc")
     Component(location_search_adapter, "Location Search Adapter", "gRPC Adapter", "grpc")
 
     Component(store_mgmt_service, "Store Management Service", "Spring Bean", "service")
     Component(store_search_service, "Store Search Service", "Spring Bean", "service")
+    Component(staff_mgmt_service, "Staff Management Service", "Spring Bean", "service")
+    Component(staff_search_service, "Staff Search Service", "Spring Bean", "service")
 
     Component(store_repository, "Store Repository", "R2DBC Repository", "repository")
     ComponentDb(store_db, "Store Database", "MySQL", "data", $tags = "storage")
 
-    Rel(command_adapter, store_mgmt_service, "Uses", "call")
-    Rel(query_adapter, store_search_service, "Uses", "call")
+    Rel(store_command_adapter, store_mgmt_service, "Uses", "call")
+    Rel(store_query_adapter, store_search_service, "Uses", "call")
     Rel(store_search_adapter, store_search_service, "Uses", "call")
+    Rel(staff_command_adapter, staff_mgmt_service, "Uses", "call")
+    Rel(staff_query_adapter, staff_search_service, "Uses", "call")
+    Rel(staff_search_adapter, staff_search_service, "Uses", "call")
 
     Rel(store_mgmt_service, store_repository, "Uses", "call")
     Rel(store_mgmt_service, catalog_search_adapter, "Uses", "call")
@@ -36,15 +46,22 @@ Container_Boundary(store_app, "Store Application") {
     Rel(store_search_service, store_repository, "Uses", "call")
     Rel(store_search_service, catalog_search_adapter, "Uses", "call")
     Rel(store_search_service, location_search_adapter, "Uses", "call")
+    Rel(staff_mgmt_service, store_repository, "Uses", "call")
+    Rel(staff_mgmt_service, location_search_adapter, "Uses", "call")
+    Rel(staff_search_service, store_repository, "Uses", "call")
+    Rel(staff_search_service, location_search_adapter, "Uses", "call")
 
     Rel_R(store_repository, store_db, "Reads from and writes to", "JDBC")
 }
 
 Rel(customer_app, store_search_adapter, "Uses", "gRPC")
-Rel(staff_app, store_search_adapter, "Uses", "gRPC")
+Rel(rental_app, staff_search_adapter, "Uses", "gRPC")
 Rel(payment_app, store_search_adapter, "Uses", "gRPC")
-Rel(ingress_gateway, command_adapter, "Uses", "HTTP")
-Rel(ingress_gateway, query_adapter, "Uses", "HTTP")
+Rel(payment_app, staff_search_adapter, "Uses", "gRPC")
+Rel(ingress_gateway, store_command_adapter, "Uses", "HTTP")
+Rel(ingress_gateway, store_query_adapter, "Uses", "HTTP")
+Rel(ingress_gateway, staff_command_adapter, "Uses", "HTTP")
+Rel(ingress_gateway, staff_query_adapter, "Uses", "HTTP")
 
 Rel(catalog_search_adapter, catalog_app, "Uses", "gRPC")
 Rel(location_search_adapter, location_app, "Uses", "gRPC")

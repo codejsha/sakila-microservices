@@ -28,8 +28,6 @@ include("services:payment")
 findProject(":services:payment")?.name = "payment"
 include("services:rental")
 findProject(":services:rental")?.name = "rental"
-include("services:staff")
-findProject(":services:staff")?.name = "staff"
 include("services:store")
 findProject(":services:store")?.name = "store"
 include("shared")
