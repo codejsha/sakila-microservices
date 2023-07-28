@@ -1,11 +1,11 @@
-package com.example.app.customerservice
+package com.example.app.store
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class CustomerServiceApplication
+class StoreApplication
 
 fun main(args: Array<String>) {
-    runApplication<CustomerServiceApplication>(*args)
+    runApplication<StoreApplication>(*args)
 }

@@ -1,6 +1,6 @@
 package com.example.app.catalog.config
 
-import com.example.app.catalog.adapter.input.web.CatalogCommandWebAdapter
+import com.example.app.catalog.adapter.input.web.CatalogManagementRestAdapter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.server.RouterFunction
@@ -10,14 +10,14 @@ import org.springframework.web.reactive.function.server.ServerResponse
 @Configuration
 class CatalogRouterConfig {
     @Bean
-    fun route(catalogCommandWebAdapter: CatalogCommandWebAdapter): RouterFunction<ServerResponse> {
+    fun route(catalogManagementRestAdapter: CatalogManagementRestAdapter): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
-            .POST("/catalog/actors", catalogCommandWebAdapter::addActor)
-            .PUT("/catalog/actors/{actorId}", catalogCommandWebAdapter::updateActorName)
-            .DELETE("/catalog/actors/{actorId}", catalogCommandWebAdapter::deleteActor)
-            .POST("/catalog/movies", catalogCommandWebAdapter::addMovie)
-            .PUT("/catalog/movies/{movieId}", catalogCommandWebAdapter::updateMovie)
-            .DELETE("/catalog/movies/{movieId}", catalogCommandWebAdapter::deleteMovie)
+            .POST("/catalog/actors", catalogManagementRestAdapter::addActor)
+            .PUT("/catalog/actors/{actorId}", catalogManagementRestAdapter::updateActorName)
+            .DELETE("/catalog/actors/{actorId}", catalogManagementRestAdapter::deleteActor)
+            .POST("/catalog/movies", catalogManagementRestAdapter::addMovie)
+            .PUT("/catalog/movies/{movieId}", catalogManagementRestAdapter::updateMovie)
+            .DELETE("/catalog/movies/{movieId}", catalogManagementRestAdapter::deleteMovie)
             .build()
     }
 }

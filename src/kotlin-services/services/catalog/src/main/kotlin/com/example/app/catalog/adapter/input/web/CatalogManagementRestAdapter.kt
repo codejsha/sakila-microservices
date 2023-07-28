@@ -14,7 +14,7 @@ import java.time.Duration
 
 @Component
 @CrossOrigin
-class CatalogCommandWebAdapter(
+class CatalogManagementRestAdapter(
     private val actorManagementUseCase: ActorManagementUseCase,
     private val movieManagementUseCase: MovieManagementUseCase,
     private val movieActorManagementUseCase: MovieActorManagementUseCase
