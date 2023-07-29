@@ -20,5 +20,4 @@ data class MovieAggregate(
     var replacementCost: BigDecimal,
     var rating: MovieRating?,
     var specialFeatures: EnumSet<SpecialFeature>?,
-    var lastUpdate: LocalDate,
 )

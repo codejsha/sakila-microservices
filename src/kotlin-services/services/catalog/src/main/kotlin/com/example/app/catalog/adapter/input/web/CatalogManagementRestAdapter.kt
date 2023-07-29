@@ -45,7 +45,7 @@ class CatalogManagementRestAdapter(
     }
 
     fun addMovie(request: ServerRequest): Mono<ServerResponse> {
-        return request.bodyToMono(MovieAddRequestDto::class.java)
+        return request.bodyToMono(MovieRequestDto::class.java)
             .flatMap { requestData -> movieManagementUseCase.addMovie(requestData) }
             .flatMap { ServerResponse.created(URI.create("/catalog/movies/${it.movieId}")).build() }
             .onErrorResume { ServerResponse.badRequest().build() }
@@ -54,7 +54,7 @@ class CatalogManagementRestAdapter(
 
     fun updateMovie(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
-        return request.bodyToMono(MovieUpdateRequestDto::class.java)
+        return request.bodyToMono(MovieRequestDto::class.java)
             .flatMap { requestData -> movieManagementUseCase.updateMovie(movieId, requestData) }
             .flatMap { ServerResponse.ok().build() }
             .onErrorResume { ServerResponse.badRequest().build() }
@@ -69,11 +69,11 @@ class CatalogManagementRestAdapter(
             .timeout(Duration.ofSeconds(10))
     }
 
-    fun includeActorInMovieActor(request: ServerRequest): Mono<ServerResponse> {
+    fun assignActorToMovie(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
-        return request.bodyToMono(MovieActorIncludeActorRequestDto::class.java)
+        return request.bodyToMono(ActorToMovieAssignRequestDto::class.java)
             .flatMap { requestData ->
-                movieActorManagementUseCase.includeActorInMovieActor(movieId, requestData.actorId)
+                movieActorManagementUseCase.assignActorToMovie(movieId, requestData.actorId)
             }
             .then(ServerResponse.ok().build())
             .onErrorResume { ServerResponse.badRequest().build() }
@@ -81,11 +81,11 @@ class CatalogManagementRestAdapter(
 
     }
 
-    fun excludeActorInMovieActor(request: ServerRequest): Mono<ServerResponse> {
+    fun unassignActorToMovie(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
-        return request.bodyToMono(MovieActorExcludeActorRequestDto::class.java)
+        return request.bodyToMono(ActorToMovieUnassignRequestDto::class.java)
             .flatMap { requestData ->
-                movieActorManagementUseCase.excludeActorFromMovieActor(movieId, requestData.actorId)
+                movieActorManagementUseCase.unassignActorToMovie(movieId, requestData.actorId)
             }
             .then(ServerResponse.ok().build())
             .onErrorResume { ServerResponse.badRequest().build() }

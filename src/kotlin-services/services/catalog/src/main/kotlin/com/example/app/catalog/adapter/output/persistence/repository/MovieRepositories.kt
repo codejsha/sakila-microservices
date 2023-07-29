@@ -2,8 +2,7 @@ package com.example.app.catalog.adapter.output.persistence.repository
 
 import com.example.app.catalog.adapter.output.persistence.table.MovieTable
 import com.example.app.catalog.application.port.output.*
-import com.example.app.catalog.domain.dto.MovieAddRequestDto
-import com.example.app.catalog.domain.dto.MovieUpdateRequestDto
+import com.example.app.catalog.domain.dto.MovieRequestDto
 import com.example.app.catalog.domain.entity.MovieAggregate
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
@@ -15,11 +14,11 @@ interface MovieRepository : ReactiveCrudRepository<MovieTable, Int>, AddMoviePor
 
 class CustomMovieRepository(private val entityTemplate: R2dbcEntityTemplate) : AddMoviePort, UpdateMoviePort,
     DeleteMoviePort, FindMoviePort, FindMovieListPort {
-    override fun addMovie(movieAddRequestDto: MovieAddRequestDto): Mono<MovieAggregate> {
+    override fun addMovie(movieRequestDto: MovieRequestDto): Mono<MovieAggregate> {
         TODO("Not yet implemented")
     }
 
-    override fun updateMovie(id: Int, movieUpdateRequestDto: MovieUpdateRequestDto): Mono<MovieAggregate> {
+    override fun updateMovie(id: Int, movieRequestDto: MovieRequestDto): Mono<MovieAggregate> {
         TODO("Not yet implemented")
     }
 

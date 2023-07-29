@@ -8,9 +8,9 @@ import org.springframework.web.reactive.function.server.RouterFunctions
 import org.springframework.web.reactive.function.server.ServerResponse
 
 @Configuration
-class CatalogRouterConfig {
+class RouterFunctionConfig {
     @Bean
-    fun route(catalogManagementRestAdapter: CatalogManagementRestAdapter): RouterFunction<ServerResponse> {
+    fun routeCatalog(catalogManagementRestAdapter: CatalogManagementRestAdapter): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
             .POST("/catalog/actors", catalogManagementRestAdapter::addActor)
             .PUT("/catalog/actors/{actorId}", catalogManagementRestAdapter::updateActorName)
