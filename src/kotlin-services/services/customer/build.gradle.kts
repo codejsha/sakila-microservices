@@ -1,3 +1,4 @@
+import com.google.protobuf.gradle.id
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -16,6 +17,7 @@ plugins {
     alias(libs.plugins.kotlin.spring)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.management)
+    alias(libs.plugins.protobuf.gradle)
 }
 
 group = "com.example.app"
@@ -24,6 +26,27 @@ version = "0.0.1-SNAPSHOT"
 kotlin {
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = libs.protobuf.protoc.get().toString()
+    }
+    plugins {
+        id("grpc") {
+            artifact = libs.grpc.protoc.gen.get().toString() +
+                    ":" + libs.versions.grpc.get().toString()
+        }
+    }
+    generateProtoTasks {
+        ofSourceSet("grpc").forEach {
+            it.plugins {
+                it.plugins {
+                    id("grpc") { }
+                }
+            }
+        }
     }
 }
 
@@ -39,22 +62,24 @@ configurations {
 dependencies {
     implementation(platform(libs.spring.boot.bom))
     implementation(project(mapOf("path" to ":shared")))
-    implementation(libs.kotlin.stdlib)
-    implementation(libs.reactor.kotlin)
     implementation(libs.spring.boot.webflux)
     implementation(libs.spring.boot.data.r2dbc)
     implementation(libs.spring.boot.data.redis.reactive)
     implementation(libs.spring.boot.validation)
     implementation(libs.spring.boot.actuator)
-    implementation(libs.guava)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.reactor.kotlin)
     runtimeOnly(libs.micrometer.prometheus)
     runtimeOnly(libs.r2dbc.mysql)
     testImplementation(libs.spring.boot.test)
     testImplementation(libs.reactor.test)
 
-    // mapstruct
-    implementation(libs.mapstruct)
-    kapt(libs.mapstruct.apt)
+    // grpc
+    implementation(platform(libs.grpc.bom))
+    implementation(libs.grpc.protobuf)
+    implementation(libs.grpc.stub)
+    runtimeOnly(libs.grpc.netty.shaded)
+    compileOnly(libs.tomcat.annotations.api)
 }
 
 tasks {

@@ -69,7 +69,6 @@ dependencies {
     implementation(libs.spring.boot.actuator)
     implementation(libs.kotlin.stdlib)
     implementation(libs.reactor.kotlin)
-    implementation(libs.guava)
     runtimeOnly(libs.micrometer.prometheus)
     runtimeOnly(libs.r2dbc.mysql)
     testImplementation(libs.spring.boot.test)
@@ -81,10 +80,6 @@ dependencies {
     implementation(libs.grpc.stub)
     runtimeOnly(libs.grpc.netty.shaded)
     compileOnly(libs.tomcat.annotations.api)
-
-    // mapstruct
-    implementation(libs.mapstruct)
-    kapt(libs.mapstruct.apt)
 }
 
 tasks {

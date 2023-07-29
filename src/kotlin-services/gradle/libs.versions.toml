@@ -5,7 +5,7 @@ kotlin = "1.8.22"
 grpc = "1.56.1"
 protobuf = "3.22.3"
 protobuf-gradle = "0.9.1"
-mapstruct = "1.5.5.Final"
+# mapstruct = "1.5.5.Final"
 
 [libraries]
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
@@ -41,10 +41,10 @@ grpc-protoc-gen = { module = "io.grpc:protoc-gen-grpc-java" }
 tomcat-annotations-api = { module = "org.apache.tomcat:annotations-api", version = "6.0.53" }
 protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protobuf" }
 
-mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct" }
-mapstruct-apt = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapstruct" }
+# mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct" }
+# mapstruct-apt = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapstruct" }
 
-guava = { module = "com.google.guava:guava", version = "32.1.1-jre" }
+# guava = { module = "com.google.guava:guava", version = "32.1.1-jre" }
 r2dbc-mysql = { module = "com.github.jasync-sql:jasync-r2dbc-mysql", version = "2.2.2" }
 # epages-restdocs-mockmvc = { module = "com.epages:restdocs-api-spec-mockmvc", version = "0.17.1" }
 # conductor-client-spring = { module = "com.netflix.conductor:conductor-client-spring", version = "3.13.5" }
