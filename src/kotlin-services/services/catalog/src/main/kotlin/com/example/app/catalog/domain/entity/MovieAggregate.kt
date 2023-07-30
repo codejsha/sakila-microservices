@@ -8,7 +8,7 @@ import java.time.LocalDate
 import java.util.*
 
 data class MovieAggregate(
-    var movieId: Int?,
+    var movieId: Int,
     var title: String,
     var description: String?,
     var releaseYear: LocalDate?,

@@ -8,7 +8,7 @@ import java.time.LocalDate
 import java.util.*
 
 data class ActorAddResponseDto(val actorId: Int, override val firstName: String, override val lastName: String) :
-    ActorName(firstName, lastName)
+    FullName(firstName, lastName)
 
 data class MovieResponseDto(
     val movieId: Int,

@@ -1,4 +1,4 @@
-package com.example.app.catalog.domain.dto
+package com.example.app.store.domain.dto
 
 import jakarta.validation.constraints.Size
 

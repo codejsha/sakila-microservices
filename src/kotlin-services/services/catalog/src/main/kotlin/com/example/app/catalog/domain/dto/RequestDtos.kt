@@ -8,10 +8,10 @@ import java.time.LocalDate
 import java.util.*
 
 data class ActorAddRequestDto(override val firstName: String, override val lastName: String) :
-    ActorName(firstName, lastName)
+    FullName(firstName, lastName)
 
 data class ActorNameUpdateRequestDto(override val firstName: String, override val lastName: String) :
-    ActorName(firstName, lastName)
+    FullName(firstName, lastName)
 
 data class MovieRequestDto(
     val title: String,
