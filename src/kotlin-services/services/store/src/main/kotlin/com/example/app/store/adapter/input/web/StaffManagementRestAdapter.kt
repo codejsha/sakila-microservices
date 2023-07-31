@@ -10,22 +10,22 @@ import reactor.core.publisher.Mono
 @CrossOrigin
 class StaffManagementRestAdapter {
     fun addStaff(request: ServerRequest): Mono<ServerResponse> {
-        return Mono.empty()
+        return Mono.error(UnsupportedOperationException("Not yet implemented"))
     }
 
     fun updateStaff(request: ServerRequest): Mono<ServerResponse> {
-        return Mono.empty()
+        return Mono.error(UnsupportedOperationException("Not yet implemented"))
     }
 
     fun deleteStaff(request: ServerRequest): Mono<ServerResponse> {
-        return Mono.empty()
+        return Mono.error(UnsupportedOperationException("Not yet implemented"))
     }
 
     fun assignStaffToStore(request: ServerRequest): Mono<ServerResponse> {
-        return Mono.empty()
+        return Mono.error(UnsupportedOperationException("Not yet implemented"))
     }
 
     fun unassignStaffFromStore(request: ServerRequest): Mono<ServerResponse> {
-        return Mono.empty()
+        return Mono.error(UnsupportedOperationException("Not yet implemented"))
     }
 }

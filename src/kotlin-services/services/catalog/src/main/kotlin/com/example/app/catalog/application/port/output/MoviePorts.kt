@@ -2,7 +2,6 @@ package com.example.app.catalog.application.port.output
 
 import com.example.app.catalog.domain.dto.MovieRequestDto
 import com.example.app.catalog.domain.entity.MovieAggregate
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 interface AddMoviePort {
@@ -22,5 +21,5 @@ interface FindMoviePort {
 }
 
 interface FindMovieListPort {
-    fun findMovies(): Flux<MovieAggregate>
+    fun findMovies(): Mono<MovieAggregate>
 }

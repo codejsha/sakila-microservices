@@ -5,7 +5,6 @@ import com.example.app.catalog.application.usecase.ActorSearchUseCase
 import com.example.app.catalog.domain.entity.ActorAggregate
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
@@ -18,7 +17,7 @@ class ActorSearchService(
     }
 
     @Transactional(readOnly = true)
-    override fun findActors(): Flux<ActorAggregate> {
+    override fun findActors(): Mono<ActorAggregate> {
         return actorRepository.findActors()
     }
 }

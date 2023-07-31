@@ -10,14 +10,14 @@ import reactor.core.publisher.Mono
 @CrossOrigin
 class StoreManagementRestAdapter {
     fun addStore(request: ServerRequest): Mono<ServerResponse> {
-        return Mono.empty()
+        return Mono.error(UnsupportedOperationException("Not yet implemented"))
     }
 
     fun updateStore(request: ServerRequest): Mono<ServerResponse> {
-        return Mono.empty()
+        return Mono.error(UnsupportedOperationException("Not yet implemented"))
     }
 
     fun deleteStore(request: ServerRequest): Mono<ServerResponse> {
-        return Mono.empty()
+        return Mono.error(UnsupportedOperationException("Not yet implemented"))
     }
 }

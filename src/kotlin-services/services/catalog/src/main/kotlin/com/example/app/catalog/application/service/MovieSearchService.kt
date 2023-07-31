@@ -5,7 +5,6 @@ import com.example.app.catalog.application.usecase.MovieSearchUseCase
 import com.example.app.catalog.domain.entity.MovieAggregate
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
@@ -18,7 +17,7 @@ class MovieSearchService(
     }
 
     @Transactional(readOnly = true)
-    override fun findMovies(): Flux<MovieAggregate> {
+    override fun findMovies(): Mono<MovieAggregate> {
         return movieRepository.findMovies()
     }
 }

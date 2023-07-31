@@ -7,7 +7,6 @@ import com.example.app.catalog.domain.dto.ActorNameUpdateRequestDto
 import com.example.app.catalog.domain.entity.ActorAggregate
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 interface ActorRepository : ReactiveCrudRepository<ActorTable, Int>, AddActorPort, UpdateActorNamePort, DeleteActorPort,
@@ -31,7 +30,7 @@ class CustomActorRepository(private val entityTemplate: R2dbcEntityTemplate) : A
         TODO("Not yet implemented")
     }
 
-    override fun findActors(): Flux<ActorAggregate> {
+    override fun findActors(): Mono<ActorAggregate> {
         TODO("Not yet implemented")
     }
 
