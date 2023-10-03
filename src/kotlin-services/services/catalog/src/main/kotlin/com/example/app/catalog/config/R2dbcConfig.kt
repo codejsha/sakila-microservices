@@ -8,7 +8,7 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 
 @Configuration
-@EnableR2dbcRepositories(basePackages = ["com.example.app.catalog.adapter.output.persistence.repository"])
+@EnableR2dbcRepositories(basePackages = ["com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.repository"])
 @EnableR2dbcAuditing
 class R2dbcConfig {
     @Bean

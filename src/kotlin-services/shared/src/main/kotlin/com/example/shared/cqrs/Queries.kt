@@ -1,6 +1,6 @@
 package com.example.shared.cqrs
 
-interface QueryPort<R>
+abstract class QueryPort<R>
 
 interface QueryPortHandler<Q : QueryPort<R>, R> {
     fun handle(query: Q): R

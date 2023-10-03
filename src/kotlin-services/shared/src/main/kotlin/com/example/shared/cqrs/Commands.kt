@@ -1,7 +1,7 @@
 package com.example.shared.cqrs
 
-interface CommandPort
+abstract class CommandPort
 
 interface CommandPortHandler<C : CommandPort> {
-    fun handle(command: C)
+    fun handle(command: C) : Any
 }

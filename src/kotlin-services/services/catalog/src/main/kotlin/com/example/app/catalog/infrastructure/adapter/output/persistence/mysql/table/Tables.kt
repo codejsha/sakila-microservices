@@ -1,4 +1,4 @@
-package com.example.app.catalog.adapter.output.persistence.table
+package com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.table
 
 import com.example.app.catalog.domain.vo.Language
 import com.example.app.catalog.domain.vo.MovieRating

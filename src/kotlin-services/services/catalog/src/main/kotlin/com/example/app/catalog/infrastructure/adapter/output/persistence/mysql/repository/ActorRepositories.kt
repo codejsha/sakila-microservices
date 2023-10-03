@@ -1,19 +1,18 @@
-package com.example.app.catalog.adapter.output.persistence.repository
+package com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.repository
 
-import com.example.app.catalog.adapter.output.persistence.table.ActorTable
-import com.example.app.catalog.application.port.output.*
+import com.example.app.catalog.application.port.output.ActorManagementPort
+import com.example.app.catalog.application.port.output.ActorSearchPort
 import com.example.app.catalog.domain.dto.ActorAddRequestDto
 import com.example.app.catalog.domain.dto.ActorNameUpdateRequestDto
 import com.example.app.catalog.domain.entity.ActorAggregate
+import com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.table.ActorTable
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import reactor.core.publisher.Mono
 
-interface ActorRepository : ReactiveCrudRepository<ActorTable, Int>, AddActorPort, UpdateActorNamePort, DeleteActorPort,
-    FindActorPort, FindActorListPort
+interface ActorRepository : ReactiveCrudRepository<ActorTable, Int>, ActorManagementPort, ActorSearchPort
 
-class CustomActorRepository(private val entityTemplate: R2dbcEntityTemplate) : AddActorPort, UpdateActorNamePort,
-    DeleteActorPort, FindActorPort, FindActorListPort {
+class CustomActorRepository(private val entityTemplate: R2dbcEntityTemplate) : ActorManagementPort, ActorSearchPort {
     override fun addActor(actorAddRequestDto: ActorAddRequestDto): Mono<ActorAggregate> {
         TODO("Not yet implemented")
     }
@@ -33,5 +32,4 @@ class CustomActorRepository(private val entityTemplate: R2dbcEntityTemplate) : A
     override fun findActors(): Mono<ActorAggregate> {
         TODO("Not yet implemented")
     }
-
 }

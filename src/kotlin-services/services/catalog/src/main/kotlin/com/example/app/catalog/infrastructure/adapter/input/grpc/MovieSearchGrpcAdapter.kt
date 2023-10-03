@@ -1,4 +1,4 @@
-package com.example.app.catalog.adapter.input.grpc
+package com.example.app.catalog.infrastructure.adapter.input.grpc
 
 import org.springframework.stereotype.Component
 
