@@ -59,8 +59,14 @@ configurations {
     }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom(libs.spring.boot.bom.get().toString())
+        mavenBom(libs.grpc.bom.get().toString())
+    }
+}
+
 dependencies {
-    implementation(platform(libs.spring.boot.bom))
     implementation(project(mapOf("path" to ":shared")))
     implementation(libs.spring.boot.webflux)
     implementation(libs.spring.boot.data.r2dbc)
@@ -75,7 +81,6 @@ dependencies {
     testImplementation(libs.reactor.test)
 
     // grpc
-    implementation(platform(libs.grpc.bom))
     implementation(libs.grpc.protobuf)
     implementation(libs.grpc.stub)
     runtimeOnly(libs.grpc.netty.shaded)
