@@ -40,6 +40,7 @@ dependencies {
     implementation(platform(libs.spring.boot.bom))
     implementation(libs.kotlin.stdlib)
     implementation(libs.spring.boot.validation)
+    implementation(libs.spring.boot.data.r2dbc)
     testImplementation(libs.spring.boot.test)
 }
 
