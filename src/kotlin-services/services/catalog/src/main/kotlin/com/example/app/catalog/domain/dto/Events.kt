@@ -8,5 +8,5 @@ data class MovieAddedEvent(val id: Int, val movieRequestDto: MovieRequestDto)
 data class MovieUpdatedEvent(val id: Int, val movieRequestDto: MovieRequestDto)
 data class MovieDeletedEvent(val id: Int)
 
-data class MovieActorAssignedEvent(val movieId: Int, val actorId: Int)
-data class MovieActorUnassignedEvent(val movieId: Int, val actorId: Int)
+data class ActorInMovieActorAddedEvent(val movieId: Int, val actorId: Int)
+data class ActorInMovieActorRemovedCommand(val movieId: Int, val actorId: Int)

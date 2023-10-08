@@ -1,6 +1,6 @@
 package com.example.app.catalog.config
 
-import com.example.app.catalog.adapter.input.web.CatalogManagementRestAdapter
+import com.example.app.catalog.infrastructure.adapter.input.web.CatalogManagementRestAdapter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.server.RouterFunction

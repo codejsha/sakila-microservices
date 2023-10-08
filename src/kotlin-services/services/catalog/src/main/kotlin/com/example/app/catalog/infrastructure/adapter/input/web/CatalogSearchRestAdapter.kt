@@ -1,4 +1,4 @@
-package com.example.app.catalog.adapter.input.web
+package com.example.app.catalog.infrastructure.adapter.input.web
 
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.CrossOrigin
