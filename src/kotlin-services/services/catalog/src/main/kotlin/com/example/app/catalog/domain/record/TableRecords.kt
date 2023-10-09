@@ -14,7 +14,7 @@ import java.util.*
 
 @Table(name = "actor", schema = "sakila")
 data class ActorRecord(
-    @Id @Column("actor_id") var actorId: Int,
+    @Id @Column("actor_id") var actorId: Int? = null,
     @Column("first_name") @Size(min = 1, max = 45) var firstName: String,
     @Column("last_name") @Size(min = 1, max = 45) var lastName: String,
 ) : BaseRecord()
