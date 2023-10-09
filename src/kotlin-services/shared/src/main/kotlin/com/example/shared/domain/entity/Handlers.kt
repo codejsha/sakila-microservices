@@ -8,8 +8,8 @@ interface CommandHandler<C : BaseCommand> {
     fun handleCommand(command: C) : List<BaseEvent>
 }
 
-interface QueryHandler<Q : BaseQuery<R>, R> {
-    fun handleQuery(query: Q): R
+interface QueryHandler<Q : BaseQuery> {
+    fun handleQuery(query: Q) : Any
 }
 
 interface EventHandler<E : BaseEvent> {
