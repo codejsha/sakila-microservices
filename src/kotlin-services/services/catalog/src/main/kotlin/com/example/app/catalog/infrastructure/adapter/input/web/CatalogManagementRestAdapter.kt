@@ -78,7 +78,7 @@ class CatalogManagementRestAdapter(
 
     fun addActorInMovieActor(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
-        return request.bodyToMono(ActorToMovieAssignRequestDto::class.java)
+        return request.bodyToMono(ActorInMovieActorAddRequestDto::class.java)
             .flatMap { requestData ->
                 movieActorManagementUseCase.addActorInMovieActor(
                     ActorInMovieActorAddCommand(movieId, requestData.actorId)
@@ -91,7 +91,7 @@ class CatalogManagementRestAdapter(
 
     fun removeActorInMovieActor(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
-        return request.bodyToMono(ActorToMovieUnassignRequestDto::class.java)
+        return request.bodyToMono(ActorInMovieActorRemoveRequestDto::class.java)
             .flatMap { requestData ->
                 movieActorManagementUseCase.removeActorInMovieActor(
                     ActorInMovieActorRemoveCommand(movieId, requestData.actorId)
