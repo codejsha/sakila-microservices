@@ -42,20 +42,20 @@ class MovieSearchService(
             .take(size)
             .collectList()
             .map {
-                it.map {
+                it.map { movie ->
                     MovieAggregate(
-                        movieId = it.movieId,
-                        title = it.title,
-                        description = it.description,
-                        releaseYear = it.releaseYear,
-                        languageId = it.languageId,
-                        originalLanguageId = it.originalLanguageId,
-                        rentalDuration = it.rentalDuration,
-                        rentalRate = it.rentalRate,
-                        length = it.length,
-                        replacementCost = it.replacementCost,
-                        rating = it.rating,
-                        specialFeatures = it.specialFeatures)
+                        movieId = movie.movieId,
+                        title = movie.title,
+                        description = movie.description,
+                        releaseYear = movie.releaseYear,
+                        languageId = movie.languageId,
+                        originalLanguageId = movie.originalLanguageId,
+                        rentalDuration = movie.rentalDuration,
+                        rentalRate = movie.rentalRate,
+                        length = movie.length,
+                        replacementCost = movie.replacementCost,
+                        rating = movie.rating,
+                        specialFeatures = movie.specialFeatures)
                 }
             }
     }
