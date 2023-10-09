@@ -47,7 +47,7 @@ class ActorAggregate(
 
     private fun handleActorAddCommand(command: ActorAddCommand): List<BaseEvent> {
         if (arePropertiesNotBlank(command.actorAddRequestDto, listOf("firstName", "lastName"))) {
-            throw IllegalArgumentException("First name and last name cannot be blank")
+            throw IllegalArgumentException("Required properties cannot be blank")
         }
         return listOf(ActorAddedEvent(command.actorAddRequestDto)
         )
