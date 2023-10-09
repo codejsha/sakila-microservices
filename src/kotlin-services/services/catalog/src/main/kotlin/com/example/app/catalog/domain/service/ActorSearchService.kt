@@ -7,6 +7,7 @@ import com.example.app.catalog.domain.entity.ActorAggregate
 import com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.repository.ActorRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
@@ -15,11 +16,17 @@ class ActorSearchService(
 ) : ActorSearchUseCase {
     @Transactional(readOnly = true)
     override fun findActor(actorGetQuery: ActorGetQuery): Mono<ActorAggregate> {
-        TODO("Not yet implemented")
+        return actorRepository.findById(actorGetQuery.id)
+            .map { ActorAggregate(it.actorId, it.firstName, it.lastName) }
     }
 
     @Transactional(readOnly = true)
-    override fun findActors(actorListGetQuery: ActorListGetQuery): Mono<ActorAggregate> {
-        TODO("Not yet implemented")
+    override fun findActors(actorListGetQuery: ActorListGetQuery): Flux<ActorAggregate> {
+        val page = actorListGetQuery.elementRequest.page
+        val size = actorListGetQuery.elementRequest.size
+        return actorRepository.findAll()
+            .skip((page - 1) * size)
+            .take(size)
+            .map { ActorAggregate(it.actorId, it.firstName, it.lastName) }
     }
 }
