@@ -82,20 +82,20 @@ class MovieAggregate(
     }
 
     private fun handleMovieAddCommand(command: MovieAddCommand): List<BaseEvent> {
-        if (arePropertiesNotBlank(command.movieRequestDto,
+        if (arePropertiesNotBlank(command.movieAddRequestDto,
                 listOf("title", "languageId", "rentalDuration", "rentalRate", "replacementCost"))) {
             throw IllegalArgumentException("Required properties cannot be blank")
         }
-        return listOf(MovieAddedEvent(command.movieRequestDto)
+        return listOf(MovieAddedEvent(command.movieAddRequestDto)
         )
     }
 
     private fun handleMovieUpdateCommand(command: MovieUpdateCommand): List<BaseEvent> {
-        if (arePropertiesNotBlank(command.movieRequestDto,
+        if (arePropertiesNotBlank(command.movieUpdateRequestDto,
                 listOf("title", "languageId", "rentalDuration", "rentalRate", "replacementCost"))) {
             throw IllegalArgumentException("Required properties cannot be blank")
         }
-        return listOf(MovieUpdatedEvent(command.id, command.movieRequestDto))
+        return listOf(MovieUpdatedEvent(command.id, command.movieUpdateRequestDto))
     }
 
     private fun handleMovieDeleteCommand(command: MovieDeleteCommand): List<BaseEvent> {
@@ -112,31 +112,31 @@ class MovieAggregate(
     }
 
     private fun handleMovieAddedEvent(event: MovieAddedEvent) {
-        title = event.movieRequestDto.title
-        description = event.movieRequestDto.description
-        releaseYear = event.movieRequestDto.releaseYear
-        languageId = event.movieRequestDto.languageId
-        originalLanguageId = event.movieRequestDto.originalLanguageId
-        rentalDuration = event.movieRequestDto.rentalDuration
-        rentalRate = event.movieRequestDto.rentalRate
-        length = event.movieRequestDto.length
-        replacementCost = event.movieRequestDto.replacementCost
-        rating = event.movieRequestDto.rating
-        specialFeatures = event.movieRequestDto.specialFeatures
+        title = event.movieAddRequestDto.title
+        description = event.movieAddRequestDto.description
+        releaseYear = event.movieAddRequestDto.releaseYear
+        languageId = event.movieAddRequestDto.languageId
+        originalLanguageId = event.movieAddRequestDto.originalLanguageId
+        rentalDuration = event.movieAddRequestDto.rentalDuration
+        rentalRate = event.movieAddRequestDto.rentalRate
+        length = event.movieAddRequestDto.length
+        replacementCost = event.movieAddRequestDto.replacementCost
+        rating = event.movieAddRequestDto.rating
+        specialFeatures = event.movieAddRequestDto.specialFeatures
     }
 
     private fun handleMovieUpdatedEvent(event: MovieUpdatedEvent) {
-        title = event.movieRequestDto.title
-        description = event.movieRequestDto.description
-        releaseYear = event.movieRequestDto.releaseYear
-        languageId = event.movieRequestDto.languageId
-        originalLanguageId = event.movieRequestDto.originalLanguageId
-        rentalDuration = event.movieRequestDto.rentalDuration
-        rentalRate = event.movieRequestDto.rentalRate
-        length = event.movieRequestDto.length
-        replacementCost = event.movieRequestDto.replacementCost
-        rating = event.movieRequestDto.rating
-        specialFeatures = event.movieRequestDto.specialFeatures
+        title = event.movieUpdateRequestDto.title
+        description = event.movieUpdateRequestDto.description
+        releaseYear = event.movieUpdateRequestDto.releaseYear
+        languageId = event.movieUpdateRequestDto.languageId
+        originalLanguageId = event.movieUpdateRequestDto.originalLanguageId
+        rentalDuration = event.movieUpdateRequestDto.rentalDuration
+        rentalRate = event.movieUpdateRequestDto.rentalRate
+        length = event.movieUpdateRequestDto.length
+        replacementCost = event.movieUpdateRequestDto.replacementCost
+        rating = event.movieUpdateRequestDto.rating
+        specialFeatures = event.movieUpdateRequestDto.specialFeatures
     }
 
     private fun handleMovieDeletedEvent(event: MovieDeletedEvent) {

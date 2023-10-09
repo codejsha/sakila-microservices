@@ -13,7 +13,21 @@ data class ActorAddRequestDto(override val firstName: String, override val lastN
 data class ActorNameUpdateRequestDto(override val firstName: String, override val lastName: String) :
     FullName(firstName, lastName)
 
-data class MovieRequestDto(
+data class MovieAddRequestDto(
+    val title: String,
+    val description: String?,
+    val releaseYear: LocalDate?,
+    val languageId: Language,
+    val originalLanguageId: Language?,
+    val rentalDuration: Int,
+    val rentalRate: BigDecimal,
+    val length: Int?,
+    val replacementCost: BigDecimal,
+    val rating: MovieRating?,
+    val specialFeatures: EnumSet<SpecialFeature>?
+)
+
+data class MovieUpdateRequestDto(
     val title: String,
     val description: String?,
     val releaseYear: LocalDate?,
