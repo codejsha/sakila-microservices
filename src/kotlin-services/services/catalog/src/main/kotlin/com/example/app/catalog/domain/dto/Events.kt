@@ -2,11 +2,11 @@ package com.example.app.catalog.domain.dto
 
 import com.example.shared.infrastructure.adapter.event.BaseEvent
 
-data class ActorAddedEvent(val id: Int, val actorAddRequestDto: ActorAddRequestDto) : BaseEvent()
+data class ActorAddedEvent(val actorAddRequestDto: ActorAddRequestDto) : BaseEvent()
 data class ActorNameUpdatedEvent(val id: Int, val actorNameUpdateRequestDto: ActorNameUpdateRequestDto) : BaseEvent()
 data class ActorDeletedEvent(val id: Int) : BaseEvent()
 
-data class MovieAddedEvent(val id: Int, val movieRequestDto: MovieRequestDto) : BaseEvent()
+data class MovieAddedEvent(val movieRequestDto: MovieRequestDto) : BaseEvent()
 data class MovieUpdatedEvent(val id: Int, val movieRequestDto: MovieRequestDto) : BaseEvent()
 data class MovieDeletedEvent(val id: Int) : BaseEvent()
 
