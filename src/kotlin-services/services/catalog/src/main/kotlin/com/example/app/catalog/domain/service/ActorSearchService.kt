@@ -15,11 +15,11 @@ class ActorSearchService(
 ) : ActorSearchUseCase {
     @Transactional(readOnly = true)
     override fun findActor(actorGetQuery: ActorGetQuery): Mono<ActorAggregate> {
-        return actorRepository.findActorById(actorGetQuery.id)
+        TODO("Not yet implemented")
     }
 
     @Transactional(readOnly = true)
     override fun findActors(actorListGetQuery: ActorListGetQuery): Mono<ActorAggregate> {
-        return actorRepository.findActors()
+        TODO("Not yet implemented")
     }
 }

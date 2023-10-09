@@ -28,6 +28,7 @@ spring-boot-test = { module = "org.springframework.boot:spring-boot-starter-test
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 # kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
 
 reactor-kotlin = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }

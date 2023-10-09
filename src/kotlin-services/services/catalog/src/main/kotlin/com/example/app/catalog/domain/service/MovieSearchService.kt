@@ -15,11 +15,11 @@ class MovieSearchService(
 ) : MovieSearchUseCase {
     @Transactional(readOnly = true)
     override fun findMovie(movieGetQuery: MovieGetQuery): Mono<MovieAggregate> {
-        return movieRepository.findMovieById(movieGetQuery.id)
+        TODO("Not yet implemented")
     }
 
     @Transactional(readOnly = true)
     override fun findMovies(movieListGetQuery: MovieListGetQuery): Mono<MovieAggregate> {
-        return movieRepository.findMovies()
+        TODO("Not yet implemented")
     }
 }

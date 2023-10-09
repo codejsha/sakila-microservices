@@ -27,5 +27,5 @@ data class MovieRequestDto(
     val specialFeatures: EnumSet<SpecialFeature>?
 )
 
-data class ActorToMovieAssignRequestDto(val actorId: Int)
-data class ActorToMovieUnassignRequestDto(val actorId: Int)
+data class ActorInMovieActorAddRequestDto(val actorId: Int)
+data class ActorInMovieActorRemoveRequestDto(val actorId: Int)

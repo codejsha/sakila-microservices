@@ -16,19 +16,16 @@ class ActorManagementService(
 ) : ActorManagementUseCase {
     @Transactional
     override fun addActor(actorAddCommand: ActorAddCommand): Mono<ActorAggregate> {
-        return actorRepository.addActor(actorAddCommand.actorAddRequestDto)
+        TODO("Not yet implemented")
     }
 
     @Transactional
     override fun updateActorName(actorNameUpdateCommand: ActorNameUpdateCommand): Mono<ActorAggregate> {
-        return actorRepository.updateActorName(
-            actorNameUpdateCommand.id,
-            actorNameUpdateCommand.actorNameUpdateRequestDto
-        )
+        TODO("Not yet implemented")
     }
 
     @Transactional
     override fun deleteActor(actorDeleteCommand: ActorDeleteCommand): Mono<Boolean> {
-        return actorRepository.deleteActor(actorDeleteCommand.id)
+        TODO("Not yet implemented")
     }
 }

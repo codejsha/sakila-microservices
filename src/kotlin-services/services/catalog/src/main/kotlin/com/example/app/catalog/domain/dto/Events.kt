@@ -1,12 +1,14 @@
 package com.example.app.catalog.domain.dto
 
-data class ActorAddedEvent(val id: Int, val actorAddRequestDto: ActorAddRequestDto)
-data class ActorNameUpdatedEvent(val id: Int, val actorNameUpdateRequestDto: ActorNameUpdateRequestDto)
-data class ActorDeletedEvent(val id: Int)
+import com.example.shared.infrastructure.adapter.event.BaseEvent
 
-data class MovieAddedEvent(val id: Int, val movieRequestDto: MovieRequestDto)
-data class MovieUpdatedEvent(val id: Int, val movieRequestDto: MovieRequestDto)
-data class MovieDeletedEvent(val id: Int)
+data class ActorAddedEvent(val actorAddRequestDto: ActorAddRequestDto) : BaseEvent()
+data class ActorNameUpdatedEvent(val id: Int, val actorNameUpdateRequestDto: ActorNameUpdateRequestDto) : BaseEvent()
+data class ActorDeletedEvent(val id: Int) : BaseEvent()
 
-data class ActorInMovieActorAddedEvent(val movieId: Int, val actorId: Int)
-data class ActorInMovieActorRemovedCommand(val movieId: Int, val actorId: Int)
+data class MovieAddedEvent(val movieRequestDto: MovieRequestDto) : BaseEvent()
+data class MovieUpdatedEvent(val id: Int, val movieRequestDto: MovieRequestDto) : BaseEvent()
+data class MovieDeletedEvent(val id: Int) : BaseEvent()
+
+data class ActorInMovieActorAddedEvent(val movieId: Int, val actorId: Int) : BaseEvent()
+data class ActorInMovieActorRemovedCommand(val movieId: Int, val actorId: Int) : BaseEvent()

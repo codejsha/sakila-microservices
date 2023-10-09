@@ -5,12 +5,12 @@ import com.example.app.catalog.application.port.output.ActorSearchPort
 import com.example.app.catalog.domain.dto.ActorAddRequestDto
 import com.example.app.catalog.domain.dto.ActorNameUpdateRequestDto
 import com.example.app.catalog.domain.entity.ActorAggregate
-import com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.table.ActorTable
+import com.example.app.catalog.domain.record.ActorRecord
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import reactor.core.publisher.Mono
 
-interface ActorRepository : ReactiveCrudRepository<ActorTable, Int>, ActorManagementPort, ActorSearchPort
+interface ActorRepository : ReactiveCrudRepository<ActorRecord, Int>, ActorManagementPort, ActorSearchPort
 
 class CustomActorRepository(private val entityTemplate: R2dbcEntityTemplate) : ActorManagementPort, ActorSearchPort {
     override fun addActor(actorAddRequestDto: ActorAddRequestDto): Mono<ActorAggregate> {

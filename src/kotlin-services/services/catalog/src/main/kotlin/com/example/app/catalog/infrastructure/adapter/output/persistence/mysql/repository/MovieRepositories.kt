@@ -4,12 +4,12 @@ import com.example.app.catalog.application.port.output.MovieManagementPort
 import com.example.app.catalog.application.port.output.MovieSearchPort
 import com.example.app.catalog.domain.dto.MovieRequestDto
 import com.example.app.catalog.domain.entity.MovieAggregate
-import com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.table.MovieTable
+import com.example.app.catalog.domain.record.MovieRecord
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import reactor.core.publisher.Mono
 
-interface MovieRepository : ReactiveCrudRepository<MovieTable, Int>, MovieManagementPort, MovieSearchPort
+interface MovieRepository : ReactiveCrudRepository<MovieRecord, Int>, MovieManagementPort, MovieSearchPort
 
 class CustomMovieRepository(private val entityTemplate: R2dbcEntityTemplate) : MovieManagementPort, MovieSearchPort {
     override fun addMovie(movieRequestDto: MovieRequestDto): Mono<MovieAggregate> {
