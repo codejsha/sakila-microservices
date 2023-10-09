@@ -21,7 +21,7 @@ data class ActorRecord(
 
 @Table(name = "film", schema = "sakila")
 data class MovieRecord(
-    @Id @Column("film_id") var movieId: Int,
+    @Id @Column("film_id") var movieId: Int? = null,
     @Column("title") @Size(min = 1, max = 128) var title: String,
     @Column("description") @Size(min = 1, max = 65535) var description: String? = null,
     @Column("release_year") var releaseYear: LocalDate? = null,
