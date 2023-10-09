@@ -12,5 +12,5 @@ interface ActorManagementUseCase {
 
 interface ActorSearchUseCase {
     fun findActor(actorGetQuery: ActorGetQuery): Mono<ActorAggregate>
-    fun findActors(actorListGetQuery: ActorListGetQuery): Mono<ActorAggregate>
+    fun findActors(actorListGetQuery: ActorListGetQuery): Mono<List<ActorAggregate>>
 }

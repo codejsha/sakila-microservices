@@ -6,8 +6,8 @@ data class ActorAddedEvent(val actorAddRequestDto: ActorAddRequestDto) : BaseEve
 data class ActorNameUpdatedEvent(val id: Int, val actorNameUpdateRequestDto: ActorNameUpdateRequestDto) : BaseEvent()
 data class ActorDeletedEvent(val id: Int) : BaseEvent()
 
-data class MovieAddedEvent(val movieRequestDto: MovieRequestDto) : BaseEvent()
-data class MovieUpdatedEvent(val id: Int, val movieRequestDto: MovieRequestDto) : BaseEvent()
+data class MovieAddedEvent(val movieAddRequestDto: MovieAddRequestDto) : BaseEvent()
+data class MovieUpdatedEvent(val id: Int, val movieUpdateRequestDto: MovieUpdateRequestDto) : BaseEvent()
 data class MovieDeletedEvent(val id: Int) : BaseEvent()
 
 data class ActorInMovieActorAddedEvent(val movieId: Int, val actorId: Int) : BaseEvent()

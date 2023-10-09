@@ -15,11 +15,48 @@ class MovieSearchService(
 ) : MovieSearchUseCase {
     @Transactional(readOnly = true)
     override fun findMovie(movieGetQuery: MovieGetQuery): Mono<MovieAggregate> {
-        TODO("Not yet implemented")
+        return movieRepository.findById(movieGetQuery.id)
+            .map {
+                MovieAggregate(
+                    movieId = it.movieId,
+                    title = it.title,
+                    description = it.description,
+                    releaseYear = it.releaseYear,
+                    languageId = it.languageId,
+                    originalLanguageId = it.originalLanguageId,
+                    rentalDuration = it.rentalDuration,
+                    rentalRate = it.rentalRate,
+                    length = it.length,
+                    replacementCost = it.replacementCost,
+                    rating = it.rating,
+                    specialFeatures = it.specialFeatures)
+            }
     }
 
     @Transactional(readOnly = true)
-    override fun findMovies(movieListGetQuery: MovieListGetQuery): Mono<MovieAggregate> {
-        TODO("Not yet implemented")
+    override fun findMovies(movieListGetQuery: MovieListGetQuery): Mono<List<MovieAggregate>> {
+        val page = movieListGetQuery.elementRequest.page
+        val size = movieListGetQuery.elementRequest.size
+        return movieRepository.findAll()
+            .skip((page - 1) * size)
+            .take(size)
+            .collectList()
+            .map {
+                it.map { movie ->
+                    MovieAggregate(
+                        movieId = movie.movieId,
+                        title = movie.title,
+                        description = movie.description,
+                        releaseYear = movie.releaseYear,
+                        languageId = movie.languageId,
+                        originalLanguageId = movie.originalLanguageId,
+                        rentalDuration = movie.rentalDuration,
+                        rentalRate = movie.rentalRate,
+                        length = movie.length,
+                        replacementCost = movie.replacementCost,
+                        rating = movie.rating,
+                        specialFeatures = movie.specialFeatures)
+                }
+            }
     }
 }

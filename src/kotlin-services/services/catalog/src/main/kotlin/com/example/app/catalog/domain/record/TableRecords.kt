@@ -14,14 +14,14 @@ import java.util.*
 
 @Table(name = "actor", schema = "sakila")
 data class ActorRecord(
-    @Id @Column("actor_id") var actorId: Int,
+    @Id @Column("actor_id") var actorId: Int? = null,
     @Column("first_name") @Size(min = 1, max = 45) var firstName: String,
     @Column("last_name") @Size(min = 1, max = 45) var lastName: String,
 ) : BaseRecord()
 
 @Table(name = "film", schema = "sakila")
 data class MovieRecord(
-    @Id @Column("film_id") var movieId: Int,
+    @Id @Column("film_id") var movieId: Int? = null,
     @Column("title") @Size(min = 1, max = 128) var title: String,
     @Column("description") @Size(min = 1, max = 65535) var description: String? = null,
     @Column("release_year") var releaseYear: LocalDate? = null,

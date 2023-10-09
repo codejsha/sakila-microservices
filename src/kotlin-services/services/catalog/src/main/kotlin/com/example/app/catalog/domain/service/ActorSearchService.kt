@@ -15,11 +15,18 @@ class ActorSearchService(
 ) : ActorSearchUseCase {
     @Transactional(readOnly = true)
     override fun findActor(actorGetQuery: ActorGetQuery): Mono<ActorAggregate> {
-        TODO("Not yet implemented")
+        return actorRepository.findById(actorGetQuery.id)
+            .map { ActorAggregate(it.actorId, it.firstName, it.lastName) }
     }
 
     @Transactional(readOnly = true)
-    override fun findActors(actorListGetQuery: ActorListGetQuery): Mono<ActorAggregate> {
-        TODO("Not yet implemented")
+    override fun findActors(actorListGetQuery: ActorListGetQuery): Mono<List<ActorAggregate>> {
+        val page = actorListGetQuery.elementRequest.page
+        val size = actorListGetQuery.elementRequest.size
+        return actorRepository.findAll()
+            .skip((page - 1) * size)
+            .take(size)
+            .collectList()
+            .map { it.map { actor -> ActorAggregate(actor.actorId, actor.firstName, actor.lastName) } }
     }
 }

@@ -6,9 +6,11 @@ import com.example.app.catalog.application.port.input.ActorNameUpdateCommand
 import com.example.app.catalog.domain.dto.ActorAddedEvent
 import com.example.app.catalog.domain.dto.ActorDeletedEvent
 import com.example.app.catalog.domain.dto.ActorNameUpdatedEvent
+import com.example.app.catalog.domain.record.ActorRecord
 import com.example.shared.application.port.BaseCommand
 import com.example.shared.domain.entity.CommandHandler
 import com.example.shared.domain.entity.EventHandler
+import com.example.shared.domain.entity.RecordableAggregate
 import com.example.shared.infrastructure.adapter.event.BaseEvent
 import com.example.shared.infrastructure.adapter.event.arePropertiesNotBlank
 
@@ -17,12 +19,20 @@ class ActorAggregate(
     var firstName: String,
     var lastName: String,
     private var isDeleted: Boolean = false
-) : CommandHandler<BaseCommand>, EventHandler<BaseEvent> {
+) : CommandHandler<BaseCommand>, EventHandler<BaseEvent>, RecordableAggregate {
     companion object {
         fun create(events: List<BaseEvent>): ActorAggregate {
             val actorAggregate = ActorAggregate(firstName = "", lastName = "")
             events.forEach { actorAggregate.handleEvent(it) }
             return actorAggregate
+        }
+
+        fun fromRecord(record: ActorRecord): ActorAggregate {
+            return ActorAggregate(
+                actorId = record.actorId,
+                firstName = record.firstName,
+                lastName = record.lastName
+            )
         }
     }
 
@@ -37,7 +47,7 @@ class ActorAggregate(
 
     private fun handleActorAddCommand(command: ActorAddCommand): List<BaseEvent> {
         if (arePropertiesNotBlank(command.actorAddRequestDto, listOf("firstName", "lastName"))) {
-            throw IllegalArgumentException("First name and last name cannot be blank")
+            throw IllegalArgumentException("Required properties cannot be blank")
         }
         return listOf(ActorAddedEvent(command.actorAddRequestDto)
         )
@@ -75,5 +85,13 @@ class ActorAggregate(
 
     private fun handleActorDeletedEvent(event: ActorDeletedEvent) {
         isDeleted = true
+    }
+
+    override fun toRecord(): ActorRecord {
+        return ActorRecord(
+            actorId = actorId,
+            firstName = firstName,
+            lastName = lastName
+        )
     }
 }

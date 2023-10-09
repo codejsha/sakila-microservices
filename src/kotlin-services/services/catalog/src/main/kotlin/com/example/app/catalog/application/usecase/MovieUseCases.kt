@@ -12,5 +12,5 @@ interface MovieManagementUseCase {
 
 interface MovieSearchUseCase {
     fun findMovie(movieGetQuery: MovieGetQuery): Mono<MovieAggregate>
-    fun findMovies(movieListGetQuery: MovieListGetQuery): Mono<MovieAggregate>
+    fun findMovies(movieListGetQuery: MovieListGetQuery): Mono<List<MovieAggregate>>
 }
