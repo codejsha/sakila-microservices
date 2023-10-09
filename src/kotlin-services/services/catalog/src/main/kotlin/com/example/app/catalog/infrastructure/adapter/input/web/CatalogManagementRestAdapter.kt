@@ -41,7 +41,7 @@ class CatalogManagementRestAdapter(
 
     fun deleteActor(request: ServerRequest): Mono<ServerResponse> {
         val actorId = request.pathVariable("actorId").toInt()
-        return actorManagementUseCase.deleteActor(ActorDeleteCommand(id = actorId))
+        return actorManagementUseCase.deleteActor(ActorDeleteCommand(actorId))
             .then(ServerResponse.noContent().build())
             .onErrorResume { ServerResponse.badRequest().build() }
             .timeout(Duration.ofSeconds(10))
