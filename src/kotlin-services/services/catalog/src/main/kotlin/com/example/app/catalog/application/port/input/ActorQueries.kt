@@ -1,7 +1,7 @@
 package com.example.app.catalog.application.port.input
 
 import com.example.app.catalog.domain.entity.ActorAggregate
-import com.example.shared.cqrs.QueryPort
+import com.example.shared.application.port.BaseQuery
 
-data class ActorGetQuery(val id: Int) : QueryPort<ActorAggregate>()
-class ActorListGetQuery : QueryPort<List<ActorAggregate>>()
+data class ActorGetQuery(val id: Int) : BaseQuery<ActorAggregate>()
+class ActorListGetQuery : BaseQuery<List<ActorAggregate>>()
