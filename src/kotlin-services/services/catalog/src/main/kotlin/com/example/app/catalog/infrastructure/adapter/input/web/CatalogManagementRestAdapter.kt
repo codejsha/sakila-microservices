@@ -41,14 +41,14 @@ class CatalogManagementRestAdapter(
 
     fun deleteActor(request: ServerRequest): Mono<ServerResponse> {
         val actorId = request.pathVariable("actorId").toInt()
-        return actorManagementUseCase.deleteActor(ActorDeleteCommand(id = actorId))
+        return actorManagementUseCase.deleteActor(ActorDeleteCommand(actorId))
             .then(ServerResponse.noContent().build())
             .onErrorResume { ServerResponse.badRequest().build() }
             .timeout(Duration.ofSeconds(10))
     }
 
     fun addMovie(request: ServerRequest): Mono<ServerResponse> {
-        return request.bodyToMono(MovieRequestDto::class.java)
+        return request.bodyToMono(MovieAddRequestDto::class.java)
             .flatMap { requestData ->
                 movieManagementUseCase.addMovie(MovieAddCommand(requestData))
             }
@@ -59,7 +59,7 @@ class CatalogManagementRestAdapter(
 
     fun updateMovie(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
-        return request.bodyToMono(MovieRequestDto::class.java)
+        return request.bodyToMono(MovieUpdateRequestDto::class.java)
             .flatMap { requestData ->
                 movieManagementUseCase.updateMovie(MovieUpdateCommand(movieId, requestData))
             }
@@ -78,7 +78,7 @@ class CatalogManagementRestAdapter(
 
     fun addActorInMovieActor(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
-        return request.bodyToMono(ActorToMovieAssignRequestDto::class.java)
+        return request.bodyToMono(ActorInMovieActorAddRequestDto::class.java)
             .flatMap { requestData ->
                 movieActorManagementUseCase.addActorInMovieActor(
                     ActorInMovieActorAddCommand(movieId, requestData.actorId)
@@ -91,7 +91,7 @@ class CatalogManagementRestAdapter(
 
     fun removeActorInMovieActor(request: ServerRequest): Mono<ServerResponse> {
         val movieId = request.pathVariable("movieId").toInt()
-        return request.bodyToMono(ActorToMovieUnassignRequestDto::class.java)
+        return request.bodyToMono(ActorInMovieActorRemoveRequestDto::class.java)
             .flatMap { requestData ->
                 movieActorManagementUseCase.removeActorInMovieActor(
                     ActorInMovieActorRemoveCommand(movieId, requestData.actorId)

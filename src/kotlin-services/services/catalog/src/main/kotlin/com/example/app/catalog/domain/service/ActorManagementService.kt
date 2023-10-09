@@ -16,19 +16,27 @@ class ActorManagementService(
 ) : ActorManagementUseCase {
     @Transactional
     override fun addActor(actorAddCommand: ActorAddCommand): Mono<ActorAggregate> {
-        return actorRepository.addActor(actorAddCommand.actorAddRequestDto)
+        val aggregate = ActorAggregate(
+            firstName = actorAddCommand.actorAddRequestDto.firstName,
+            lastName = actorAddCommand.actorAddRequestDto.lastName
+        )
+        val record = aggregate.toRecord()
+        return actorRepository.save(record).map { ActorAggregate.fromRecord(it) }
     }
 
     @Transactional
     override fun updateActorName(actorNameUpdateCommand: ActorNameUpdateCommand): Mono<ActorAggregate> {
-        return actorRepository.updateActorName(
-            actorNameUpdateCommand.id,
-            actorNameUpdateCommand.actorNameUpdateRequestDto
+        val aggregate = ActorAggregate(
+            actorId = actorNameUpdateCommand.id,
+            firstName = actorNameUpdateCommand.actorNameUpdateRequestDto.firstName,
+            lastName = actorNameUpdateCommand.actorNameUpdateRequestDto.lastName
         )
+        val record = aggregate.toRecord()
+        return actorRepository.save(record).map { ActorAggregate.fromRecord(it) }
     }
 
     @Transactional
     override fun deleteActor(actorDeleteCommand: ActorDeleteCommand): Mono<Boolean> {
-        return actorRepository.deleteActor(actorDeleteCommand.id)
+        return actorRepository.deleteById(actorDeleteCommand.id).then(Mono.fromCallable { true })
     }
 }

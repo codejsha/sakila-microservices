@@ -16,19 +16,45 @@ class MovieManagementService(
 ) : MovieManagementUseCase {
     @Transactional
     override fun addMovie(movieAddCommand: MovieAddCommand): Mono<MovieAggregate> {
-        return movieRepository.addMovie(movieAddCommand.movieRequestDto)
+        val aggregate = MovieAggregate(
+            title = movieAddCommand.movieAddRequestDto.title,
+            description = movieAddCommand.movieAddRequestDto.description,
+            releaseYear = movieAddCommand.movieAddRequestDto.releaseYear,
+            languageId = movieAddCommand.movieAddRequestDto.languageId,
+            originalLanguageId = movieAddCommand.movieAddRequestDto.originalLanguageId,
+            rentalDuration = movieAddCommand.movieAddRequestDto.rentalDuration,
+            rentalRate = movieAddCommand.movieAddRequestDto.rentalRate,
+            length = movieAddCommand.movieAddRequestDto.length,
+            replacementCost = movieAddCommand.movieAddRequestDto.replacementCost,
+            rating = movieAddCommand.movieAddRequestDto.rating,
+            specialFeatures = movieAddCommand.movieAddRequestDto.specialFeatures
+        )
+        val record = aggregate.toRecord()
+        return movieRepository.save(record).map { MovieAggregate.fromRecord(it) }
     }
 
     @Transactional
     override fun updateMovie(movieUpdateCommand: MovieUpdateCommand): Mono<MovieAggregate> {
-        return movieRepository.updateMovie(
-            movieUpdateCommand.id,
-            movieUpdateCommand.movieRequestDto
+        val aggregate = MovieAggregate(
+            movieId = movieUpdateCommand.id,
+            title = movieUpdateCommand.movieUpdateRequestDto.title,
+            description = movieUpdateCommand.movieUpdateRequestDto.description,
+            releaseYear = movieUpdateCommand.movieUpdateRequestDto.releaseYear,
+            languageId = movieUpdateCommand.movieUpdateRequestDto.languageId,
+            originalLanguageId = movieUpdateCommand.movieUpdateRequestDto.originalLanguageId,
+            rentalDuration = movieUpdateCommand.movieUpdateRequestDto.rentalDuration,
+            rentalRate = movieUpdateCommand.movieUpdateRequestDto.rentalRate,
+            length = movieUpdateCommand.movieUpdateRequestDto.length,
+            replacementCost = movieUpdateCommand.movieUpdateRequestDto.replacementCost,
+            rating = movieUpdateCommand.movieUpdateRequestDto.rating,
+            specialFeatures = movieUpdateCommand.movieUpdateRequestDto.specialFeatures
         )
+        val record = aggregate.toRecord()
+        return movieRepository.save(record).map { MovieAggregate.fromRecord(it) }
     }
 
     @Transactional
     override fun deleteMovie(movieDeleteCommand: MovieDeleteCommand): Mono<Boolean> {
-        return movieRepository.deleteMovie(movieDeleteCommand.id)
+        return movieRepository.deleteById(movieDeleteCommand.id).then(Mono.fromCallable { true })
     }
 }

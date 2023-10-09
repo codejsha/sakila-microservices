@@ -1,8 +1,9 @@
 package com.example.app.catalog.application.port.input
 
-import com.example.app.catalog.domain.dto.MovieRequestDto
-import com.example.shared.cqrs.CommandPort
+import com.example.app.catalog.domain.dto.MovieAddRequestDto
+import com.example.app.catalog.domain.dto.MovieUpdateRequestDto
+import com.example.shared.application.port.BaseCommand
 
-data class MovieAddCommand(val movieRequestDto: MovieRequestDto) : CommandPort()
-data class MovieUpdateCommand(val id: Int, val movieRequestDto: MovieRequestDto) : CommandPort()
-data class MovieDeleteCommand(val id: Int) : CommandPort()
+data class MovieAddCommand(val movieAddRequestDto: MovieAddRequestDto) : BaseCommand()
+data class MovieUpdateCommand(val id: Int, val movieUpdateRequestDto: MovieUpdateRequestDto) : BaseCommand()
+data class MovieDeleteCommand(val id: Int) : BaseCommand()

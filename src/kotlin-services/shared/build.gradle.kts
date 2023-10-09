@@ -38,6 +38,7 @@ configurations {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.reflect)
     implementation(libs.spring.boot.starter.json)
     implementation(libs.spring.boot.validation)
     implementation(libs.spring.boot.data.r2dbc)

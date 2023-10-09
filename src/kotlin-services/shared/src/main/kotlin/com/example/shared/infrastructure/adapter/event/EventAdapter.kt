@@ -2,7 +2,7 @@ package com.example.shared.infrastructure.adapter.event
 
 import org.springframework.kafka.core.KafkaTemplate
 
-open class BaseEventAdapter(
+open class EventAdapter(
     private val producer: KafkaTemplate<String, BaseEvent>
 ) {
     open fun publish(topic: String, event: BaseEvent) {
