@@ -143,7 +143,7 @@ class MovieAggregate(
         isDeleted = true
     }
 
-    override fun toRecord(): Any {
+    override fun toRecord(): MovieRecord {
         return MovieRecord(
             movieId = movieId,
             title = title,
