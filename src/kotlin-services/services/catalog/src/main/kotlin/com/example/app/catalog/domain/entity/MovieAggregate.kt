@@ -15,7 +15,7 @@ import com.example.shared.domain.entity.CommandHandler
 import com.example.shared.domain.entity.EventHandler
 import com.example.shared.domain.entity.RecordableAggregate
 import com.example.shared.infrastructure.adapter.event.BaseEvent
-import com.example.shared.infrastructure.adapter.event.arePropertiesNotBlank
+import com.example.shared.infrastructure.adapter.event.arePropertiesBlank
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.*
@@ -82,18 +82,18 @@ class MovieAggregate(
     }
 
     private fun handleMovieAddCommand(command: MovieAddCommand): List<BaseEvent> {
-        if (arePropertiesNotBlank(command.movieAddRequestDto,
-                listOf("title", "languageId", "rentalDuration", "rentalRate", "replacementCost"))) {
-            throw IllegalArgumentException("Required properties cannot be blank")
+        require(!arePropertiesBlank(command.movieAddRequestDto,
+            listOf("title", "languageId", "rentalDuration", "rentalRate", "replacementCost"))) {
+            "Required properties cannot be blank"
         }
         return listOf(MovieAddedEvent(command.movieAddRequestDto)
         )
     }
 
     private fun handleMovieUpdateCommand(command: MovieUpdateCommand): List<BaseEvent> {
-        if (arePropertiesNotBlank(command.movieUpdateRequestDto,
-                listOf("title", "languageId", "rentalDuration", "rentalRate", "replacementCost"))) {
-            throw IllegalArgumentException("Required properties cannot be blank")
+        require(!arePropertiesBlank(command.movieUpdateRequestDto,
+            listOf("title", "languageId", "rentalDuration", "rentalRate", "replacementCost"))) {
+            "Required properties cannot be blank"
         }
         return listOf(MovieUpdatedEvent(command.id, command.movieUpdateRequestDto))
     }

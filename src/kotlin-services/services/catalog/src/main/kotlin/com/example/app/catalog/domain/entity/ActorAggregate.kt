@@ -12,7 +12,7 @@ import com.example.shared.domain.entity.CommandHandler
 import com.example.shared.domain.entity.EventHandler
 import com.example.shared.domain.entity.RecordableAggregate
 import com.example.shared.infrastructure.adapter.event.BaseEvent
-import com.example.shared.infrastructure.adapter.event.arePropertiesNotBlank
+import com.example.shared.infrastructure.adapter.event.arePropertiesBlank
 
 class ActorAggregate(
     var actorId: Int? = null,
@@ -46,16 +46,16 @@ class ActorAggregate(
     }
 
     private fun handleActorAddCommand(command: ActorAddCommand): List<BaseEvent> {
-        if (arePropertiesNotBlank(command.actorAddRequestDto, listOf("firstName", "lastName"))) {
-            throw IllegalArgumentException("Required properties cannot be blank")
+        require(arePropertiesBlank(command.actorAddRequestDto, listOf("firstName", "lastName"))) {
+            "Required properties cannot be blank"
         }
         return listOf(ActorAddedEvent(command.actorAddRequestDto)
         )
     }
 
     private fun handleActorNameUpdateCommand(command: ActorNameUpdateCommand): List<BaseEvent> {
-        if (arePropertiesNotBlank(command.actorNameUpdateRequestDto, listOf("firstName", "lastName"))) {
-            throw IllegalArgumentException("First name and last name cannot be blank")
+        require(!arePropertiesBlank(command.actorNameUpdateRequestDto, listOf("firstName", "lastName"))) {
+            "First name and last name cannot be blank"
         }
         return listOf(ActorNameUpdatedEvent(command.id, command.actorNameUpdateRequestDto))
     }
