@@ -1,4 +1,4 @@
-package com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.repository
+package com.example.app.catalog.infrastructure.adapter.output.persistence.database
 
 import com.example.app.catalog.application.port.output.MovieActorManagementPort
 import com.example.app.catalog.domain.record.MovieActorRecord
