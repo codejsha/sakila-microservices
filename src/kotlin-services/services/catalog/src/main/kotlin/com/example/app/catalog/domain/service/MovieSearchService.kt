@@ -4,7 +4,7 @@ import com.example.app.catalog.application.port.input.MovieGetQuery
 import com.example.app.catalog.application.port.input.MovieListGetQuery
 import com.example.app.catalog.application.usecase.MovieSearchUseCase
 import com.example.app.catalog.domain.entity.MovieAggregate
-import com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.repository.MovieRepository
+import com.example.app.catalog.infrastructure.adapter.output.persistence.database.MovieRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono

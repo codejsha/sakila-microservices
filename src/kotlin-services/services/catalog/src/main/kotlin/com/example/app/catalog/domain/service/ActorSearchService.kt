@@ -4,7 +4,7 @@ import com.example.app.catalog.application.port.input.ActorGetQuery
 import com.example.app.catalog.application.port.input.ActorListGetQuery
 import com.example.app.catalog.application.usecase.ActorSearchUseCase
 import com.example.app.catalog.domain.entity.ActorAggregate
-import com.example.app.catalog.infrastructure.adapter.output.persistence.mysql.repository.ActorRepository
+import com.example.app.catalog.infrastructure.adapter.output.persistence.database.ActorRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
