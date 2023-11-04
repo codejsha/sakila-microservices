@@ -78,8 +78,11 @@ dependencies {
     implementation(libs.reactor.kotlin)
     runtimeOnly(libs.micrometer.prometheus)
     runtimeOnly(libs.r2dbc.mysql)
+    runtimeOnly(libs.mysql.connector)
     testImplementation(libs.spring.boot.test)
+    testImplementation(libs.kotlin.test)
     testImplementation(libs.reactor.test)
+    testImplementation(libs.testcontainers.mysql)
 
     // grpc
     implementation(libs.grpc.protobuf)
