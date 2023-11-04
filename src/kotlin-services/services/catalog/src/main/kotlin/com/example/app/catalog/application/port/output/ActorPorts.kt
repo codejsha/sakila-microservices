@@ -3,6 +3,8 @@ package com.example.app.catalog.application.port.output
 import com.example.app.catalog.domain.dto.ActorAddRequestDto
 import com.example.app.catalog.domain.dto.ActorNameUpdateRequestDto
 import com.example.app.catalog.domain.entity.ActorAggregate
+import com.example.app.catalog.domain.record.ActorRecord
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 interface ActorManagementPort {
@@ -12,6 +14,6 @@ interface ActorManagementPort {
 }
 
 interface ActorSearchPort {
-    fun findActorById(id: Int): Mono<ActorAggregate>
-    fun findActors(): Mono<ActorAggregate>
+    fun findById(id: Int): Mono<ActorRecord>
+    fun findAll(): Flux<ActorRecord>
 }
