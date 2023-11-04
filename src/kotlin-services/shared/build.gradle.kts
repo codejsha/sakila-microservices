@@ -43,7 +43,11 @@ dependencies {
     implementation(libs.spring.boot.validation)
     implementation(libs.spring.boot.data.r2dbc)
     implementation(libs.spring.kafka)
+    implementation(libs.spring.boot.test)
+    implementation(libs.kotlin.test)
+    implementation(libs.testcontainers.mysql)
     testImplementation(libs.spring.boot.test)
+    testImplementation(libs.kotlin.test)
 }
 
 tasks {
